@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Интекс-Электро — обеспечение инфраструктуры для крупных строительных объектов. Электрощитовое оборудование, кабель, кабеленесущие системы, освещение.">
+  <meta name="theme-color" content="#0b0b0b">
+  <title>Интекс-Электро — инженерные системы для федеральных строек</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#top" class="logo" aria-label="Интекс-Электро — на главную">
+        <img src="assets/img/logo.png" alt="Интекс-Электро" width="200" height="133">
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a href="#products" class="nav__link">Продукция</a>
+        <a href="#about" class="nav__link">О нас</a>
+        <a href="#contacts" class="nav__link">Контакты</a>
+      </nav>
+
+      <div class="header__contacts">
+        <a href="tel:+79043866590" class="header__phone">+7 (904) 386-65-90</a>
+        <a href="tel:+73432712299" class="header__phone">+7 (343) 271-22-99</a>
+        <a href="#feedback" class="header__cta" aria-label="Оставить заявку">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Z" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="12" cy="9" r="2.2" stroke="currentColor" stroke-width="1.6"/>
+          </svg>
+        </a>
+      </div>
+
+      <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero__bg" style="background-image: url('assets/img/hero-bg.jpg')"></div>
+      <div class="hero__overlay"></div>
+      <div class="container hero__grid">
+        <div class="hero__content">
+          <h1 class="hero__title">Проводник<br>ваших<br>инженерных<br>решений</h1>
+          <p class="hero__subtitle">Интекс-электро — обеспечение инфраструктуры<br>для крупных строительных объектов</p>
+          <a href="#feedback" class="btn btn--gold">Заказать звонок</a>
+        </div>
+        <ul class="hero__features" aria-label="Преимущества">
+          <li>» Персональное отношение</li>
+          <li>» Доставка в срок</li>
+          <li>» Быстрая отгрузка</li>
+          <li>» Оптимальные цены от производителя</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section class="section products" id="products">
+      <div class="container">
+        <p class="section__label">» Энергия в деталях</p>
+        <h2 class="section__title">Надёжный фундамент<br>энергосистемы</h2>
+
+        <div class="products__grid">
+          <article class="product-card">
+            <div class="product-card__media">
+              <img src="assets/img/product-switchgear.jpg" alt="Электрощитовое оборудование" loading="lazy" width="800" height="446">
+            </div>
+            <div class="product-card__body">
+              <span class="product-card__tag">Продукция компании</span>
+              <h3 class="product-card__title">Электрощитовое<br>и низковольтное оборудование</h3>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-card__media">
+              <img src="assets/img/product-cables.jpg" alt="Кабельная продукция" loading="lazy" width="800" height="446">
+            </div>
+            <div class="product-card__body">
+              <span class="product-card__tag">Продукция компании</span>
+              <h3 class="product-card__title">Кабельная продукция</h3>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-card__media">
+              <img src="assets/img/product-cable-trays.jpg" alt="Кабеленесущие системы" loading="lazy" width="800" height="446">
+            </div>
+            <div class="product-card__body">
+              <span class="product-card__tag">Продукция компании</span>
+              <h3 class="product-card__title">Кабеленесущие системы</h3>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-card__media">
+              <img src="assets/img/product-lighting.jpg" alt="Системы освещения" loading="lazy" width="800" height="446">
+            </div>
+            <div class="product-card__body">
+              <span class="product-card__tag">Продукция компании</span>
+              <h3 class="product-card__title">Системы освещения<br>и осветительные устройства</h3>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section about" id="about">
+      <div class="container about__grid">
+        <div class="about__content">
+          <p class="section__label">» О компании</p>
+          <h2 class="section__title">Гарантированное<br>качество —<br>инженерные системы для<br>федеральных строек</h2>
+          <div class="about__text">
+            <p>Наша компания специализируется на комплексных решениях <strong>инженерной инфраструктуры</strong> для крупных строительных Федеральных объектов. За время работы мы зарекомендовали себя как надёжный поставщик, предлагающий высокое качество продукции, индивидуальный подход к клиентам и своевременные поставки.</p>
+            <p>Благодаря нашему профессионализму и обширной сети партнёров, мы сможем предложить продукцию с конкурентными ценами.</p>
+          </div>
+          <a href="#feedback" class="btn btn--gold">Оставить заявку</a>
+        </div>
+        <div class="about__media">
+          <img src="assets/img/about-engineer.jpg" alt="Инженер проверяет электрощитовое оборудование" loading="lazy" width="900" height="1349">
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="section partners" id="partners">
+      <div class="container">
+        <p class="section__label">» Наши партнеры</p>
+        <h2 class="section__title">Наша компания является<br>официальным дистрибьютором<br>компаний</h2>
+        <p class="section__lead">Гарантируем оригинальность продукции и высокие стандарты качества.<br>Благодаря прямым контрактам с производителями, наши ценовые предложения<br>остаются оптимальными на рынке.</p>
+
+        <div class="partners__grid">
+          <div class="partner-card"><img src="assets/img/partner-eltex.jpg" alt="ELTEX" loading="lazy"></div>
+          <div class="partner-card"><img src="assets/img/partner-cnp.jpg" alt="CNP" loading="lazy"></div>
+          <div class="partner-card"><img src="assets/img/partner-aikon.jpg" alt="aikon" loading="lazy"></div>
+          <div class="partner-card"><img src="assets/img/partner-energocable.jpg" alt="АО Завод Энергокабель" loading="lazy"></div>
+          <div class="partner-card"><img src="assets/img/partner-paritet.jpg" alt="Паритет Кабельный завод" loading="lazy"></div>
+          <div class="partner-card"><img src="assets/img/partner-ostec.jpg" alt="OSTEC система инженерных трасс" loading="lazy"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq" id="faq">
+      <div class="container">
+        <p class="section__label">» Вопросы</p>
+        <h2 class="section__title">Часто задаваемые вопросы</h2>
+
+        <div class="faq__list">
+          <details class="faq__item">
+            <summary>
+              <span>Что входит в понятие «комплексные инженерные решения»?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__answer">
+              <p>Комплексные инженерные решения — это полный цикл работ «под ключ»: подбор и поставка электрощитового и низковольтного оборудования, кабельной продукции, кабеленесущих систем и освещения, а также техническая поддержка на всех этапах проекта. Мы закрываем потребность объекта в электротехнической инфраструктуре одним подрядчиком.</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary>
+              <span>Как Вы гарантируете качество поставляемого электротехнического оборудования?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__answer">
+              <p>Мы работаем как официальный дистрибьютор производителей: поставляем оригинальную продукцию с сертификатами соответствия, гарантией завода и прозрачной прослеживаемостью партий. Перед отгрузкой контролируем комплектность и соответствие спецификации проекта.</p>
+            </div>
+          </details>
+
+          <details class="faq__item" open>
+            <summary>
+              <span>Какие преимущества даёт заказ инженерных систем «под ключ» у одного поставщика?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__answer">
+              <p>Заказ инженерных решений «под ключ» даёт заказчику ряд весомых преимуществ: единство ответственности — исключает ситуации, когда разные подрядчики перекладывают вину друг на друга; оптимизация сроков — позволяет избежать задержек и уложиться в график строительства; экономия бюджета — позволяет снизить затраты за счёт оптимизации логистики, объёмов закупок и исключения дублирующих работ; гарантия и сервис.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="section experience" id="experience">
+      <div class="container">
+        <p class="section__label">» Опыт</p>
+        <h2 class="section__title">Проводники надежности и опыта</h2>
+        <p class="section__lead">В «Интекс-Электро» мы не просто комплектуем объекты — мы понимаем, как они работают.<br>Наши специалисты — это инженеры с опытом реализации крупных инфраструктурных задач.</p>
+      </div>
+      <div class="experience__photo">
+        <img src="assets/img/experience.jpg" alt="Инженер с планшетом у электрощита" loading="lazy" width="1920" height="1280">
+      </div>
+    </section>
+
+    <!-- Feedback form -->
+    <section class="section feedback" id="feedback">
+      <div class="container">
+        <p class="section__label">» Обратная связь</p>
+        <h2 class="section__title">Нужна консультация?</h2>
+        <p class="feedback__accent">Оставьте сообщение, и мы ответим вам</p>
+        <p class="section__lead">Наша компания готова стать надёжным поставщиком на ваши строительные объекты.<br>Мы уверены, что наше сотрудничество будет долгосрочным и результативным!</p>
+
+        <form class="form" id="lead-form" novalidate>
+          <div class="form__row">
+            <label class="form__field">
+              <span class="visually-hidden">Имя</span>
+              <input type="text" name="name" placeholder="Иван......" autocomplete="name" required>
+            </label>
+            <label class="form__field">
+              <span class="visually-hidden">Номер телефона</span>
+              <input type="tel" name="phone" placeholder="Номер телефона" autocomplete="tel" required>
+            </label>
+            <label class="form__field">
+              <span class="visually-hidden">Комментарий</span>
+              <input type="text" name="comment" placeholder="Комментарий" autocomplete="off">
+            </label>
+            <button type="submit" class="btn btn--gold form__submit">Оставить заявку</button>
+          </div>
+
+          <label class="form__check">
+            <input type="checkbox" name="offer" required>
+            <span>Я согласен с условиями <a href="#offer">оферты</a>.</span>
+          </label>
+          <label class="form__check">
+            <input type="checkbox" name="privacy" required>
+            <span>Я согласен на обработку моих персональных данных. С <a href="#privacy">политикой обработки персональных данных</a> ознакомлен.</span>
+          </label>
+
+          <p class="form__status" id="form-status" role="status" aria-live="polite" hidden></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Contacts -->
+    <section class="section contacts" id="contacts">
+      <div class="container">
+        <p class="section__label">» Контакты</p>
+        <h2 class="section__title">Проведём линию к вашему проекту</h2>
+
+        <div class="contacts__grid">
+          <div class="contacts__item">
+            <span class="contacts__label">Номер телефона:</span>
+            <a href="tel:+79043866590">+7 (904) 386-65-90</a>
+            <a href="tel:+73432712299">+7 (343) 271-22-99</a>
+          </div>
+          <div class="contacts__item">
+            <span class="contacts__label">Юридический адрес:</span>
+            <p>620146, Екатеринбург, ул.<br>Шаумяна, дом 87, кв. 313</p>
+          </div>
+          <div class="contacts__item">
+            <span class="contacts__label">Фактический адрес:</span>
+            <p>620146, г. Екатеринбург, ул.<br>Ясная, дом 31, оф. 107</p>
+          </div>
+          <div class="contacts__item">
+            <span class="contacts__label">Электронная почта:</span>
+            <a class="contacts__mail" href="mailto:oooIntexelectro@mail.ru">oooIntexelectro@mail.ru</a>
+          </div>
+          <div class="contacts__item">
+            <span class="contacts__label">Реквизиты:</span>
+            <p>ОГРН 1246600045999<br>ИНН 6671312739 / КПП 66710100</p>
+          </div>
+          <div class="contacts__item">
+            <span class="contacts__label">Режим работы:</span>
+            <p>Пн–Пт: 9.00 – 18.00<br>Сб–Вс: Выходной</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contacts__map">
+        <img src="assets/img/map.jpg" alt="Карта: Ясная улица, 31, Екатеринбург" loading="lazy" width="1844" height="804">
+        <div class="contacts__pin" aria-hidden="true">
+          <span class="contacts__pin-icon">
+            <img src="assets/img/logo.png" alt="" width="40" height="40">
+          </span>
+          <span class="contacts__pin-label">Ясная улица, 31</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__top">
+      <a href="#top" class="logo logo--footer">
+        <img src="assets/img/logo.png" alt="Интекс-Электро" width="180" height="120">
+      </a>
+      <nav class="nav nav--footer" aria-label="Навигация в подвале">
+        <a href="#products" class="nav__link">Продукция</a>
+        <a href="#about" class="nav__link">О нас</a>
+        <a href="#contacts" class="nav__link">Контакты</a>
+      </nav>
+      <div class="header__contacts">
+        <a href="tel:+79043866590" class="header__phone">+7 (904) 386-65-90</a>
+        <a href="tel:+73432712299" class="header__phone">+7 (343) 271-22-99</a>
+        <a href="#feedback" class="header__cta" aria-label="Оставить заявку">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Z" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="12" cy="9" r="2.2" stroke="currentColor" stroke-width="1.6"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <a href="#privacy" id="privacy">Политика конфиденциальности</a>
+      <a href="#offer" id="offer">Публичная оферта</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
