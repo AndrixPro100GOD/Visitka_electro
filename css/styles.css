@@ -675,12 +675,13 @@ input {
   object-fit: cover;
   object-position: center;
   display: block;
-  filter: grayscale(0.75) brightness(0.7) contrast(1.05);
-  transition: filter var(--transition);
+  /* Design map is already dark-themed — keep natural look */
+  filter: none;
+  transition: opacity var(--transition);
 }
 
 .contacts__map-link:hover .contacts__map-img {
-  filter: grayscale(0.35) brightness(0.82) contrast(1.05);
+  opacity: 0.92;
 }
 
 .contacts__map-pin {
