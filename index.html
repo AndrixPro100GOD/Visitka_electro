@@ -31,11 +31,14 @@
       <div class="header__contacts">
         <a href="tel:+79043866590" class="header__phone">+7 (904) 386-65-90</a>
         <a href="tel:+73432712299" class="header__phone">+7 (343) 271-22-99</a>
-        <a href="#feedback" class="header__cta" aria-label="Оставить заявку">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Z" stroke="currentColor" stroke-width="1.6"/>
-            <circle cx="12" cy="9" r="2.2" stroke="currentColor" stroke-width="1.6"/>
-          </svg>
+        <a
+          href="https://max.ru/"
+          class="header__social"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Мы в MAX"
+        >
+          <img src="assets/img/max.svg" alt="MAX" width="28" height="28">
         </a>
       </div>
 
@@ -50,18 +53,20 @@
     <section class="hero">
       <div class="hero__bg" style="background-image: url('assets/img/hero-bg.jpg')"></div>
       <div class="hero__overlay"></div>
-      <div class="container hero__grid">
-        <div class="hero__content">
-          <h1 class="hero__title">Проводник<br>ваших<br>инженерных<br>решений</h1>
-          <p class="hero__subtitle">Интекс-электро — обеспечение инфраструктуры<br>для крупных строительных объектов</p>
-          <a href="#feedback" class="btn btn--gold">Заказать звонок</a>
+      <div class="hero__shell">
+        <div class="hero__grid">
+          <div class="hero__content">
+            <h1 class="hero__title">Проводник<br>ваших<br>инженерных<br>решений</h1>
+            <p class="hero__subtitle">Интекс-электро — обеспечение инфраструктуры<br>для крупных строительных объектов</p>
+            <a href="#contacts" class="btn btn--gold">Заказать звонок</a>
+          </div>
+          <ul class="hero__features" aria-label="Преимущества">
+            <li>» Персональное отношение</li>
+            <li>» Доставка в срок</li>
+            <li>» Быстрая отгрузка</li>
+            <li>» Оптимальные цены от производителя</li>
+          </ul>
         </div>
-        <ul class="hero__features" aria-label="Преимущества">
-          <li>» Персональное отношение</li>
-          <li>» Доставка в срок</li>
-          <li>» Быстрая отгрузка</li>
-          <li>» Оптимальные цены от производителя</li>
-        </ul>
       </div>
     </section>
 
@@ -74,7 +79,7 @@
         <div class="products__grid">
           <article class="product-card">
             <div class="product-card__media">
-              <img src="assets/img/product-switchgear.jpg" alt="Электрощитовое оборудование" loading="lazy" width="800" height="446">
+              <img src="assets/img/product-switchgear.png" alt="Электрощитовое оборудование" loading="lazy" width="492" height="398">
             </div>
             <div class="product-card__body">
               <span class="product-card__tag">Продукция компании</span>
@@ -84,7 +89,7 @@
 
           <article class="product-card">
             <div class="product-card__media">
-              <img src="assets/img/product-cables.jpg" alt="Кабельная продукция" loading="lazy" width="800" height="446">
+              <img src="assets/img/product-cables.png" alt="Кабельная продукция" loading="lazy" width="610" height="393">
             </div>
             <div class="product-card__body">
               <span class="product-card__tag">Продукция компании</span>
@@ -94,7 +99,7 @@
 
           <article class="product-card">
             <div class="product-card__media">
-              <img src="assets/img/product-cable-trays.jpg" alt="Кабеленесущие системы" loading="lazy" width="800" height="446">
+              <img src="assets/img/product-cable-trays.png" alt="Кабеленесущие системы" loading="lazy" width="714" height="380">
             </div>
             <div class="product-card__body">
               <span class="product-card__tag">Продукция компании</span>
@@ -104,7 +109,7 @@
 
           <article class="product-card">
             <div class="product-card__media">
-              <img src="assets/img/product-lighting.jpg" alt="Системы освещения" loading="lazy" width="800" height="446">
+              <img src="assets/img/product-lighting.png" alt="Системы освещения" loading="lazy" width="724" height="401">
             </div>
             <div class="product-card__body">
               <span class="product-card__tag">Продукция компании</span>
@@ -125,10 +130,10 @@
             <p>Наша компания специализируется на комплексных решениях <strong>инженерной инфраструктуры</strong> для крупных строительных Федеральных объектов. За время работы мы зарекомендовали себя как надёжный поставщик, предлагающий высокое качество продукции, индивидуальный подход к клиентам и своевременные поставки.</p>
             <p>Благодаря нашему профессионализму и обширной сети партнёров, мы сможем предложить продукцию с конкурентными ценами.</p>
           </div>
-          <a href="#feedback" class="btn btn--gold">Оставить заявку</a>
+          <a href="#contacts" class="btn btn--gold">Оставить заявку</a>
         </div>
         <div class="about__media">
-          <img src="assets/img/about-engineer.jpg" alt="Инженер проверяет электрощитовое оборудование" loading="lazy" width="900" height="1349">
+          <img src="assets/img/about-engineer.jpg" alt="Инженер проверяет электрощитовое оборудование" loading="lazy" width="800" height="1200">
         </div>
       </div>
     </section>
@@ -141,12 +146,12 @@
         <p class="section__lead">Гарантируем оригинальность продукции и высокие стандарты качества.<br>Благодаря прямым контрактам с производителями, наши ценовые предложения<br>остаются оптимальными на рынке.</p>
 
         <div class="partners__grid">
-          <div class="partner-card"><img src="assets/img/partner-eltex.jpg" alt="ELTEX" loading="lazy"></div>
-          <div class="partner-card"><img src="assets/img/partner-cnp.jpg" alt="CNP" loading="lazy"></div>
-          <div class="partner-card"><img src="assets/img/partner-aikon.jpg" alt="aikon" loading="lazy"></div>
-          <div class="partner-card"><img src="assets/img/partner-energocable.jpg" alt="АО Завод Энергокабель" loading="lazy"></div>
-          <div class="partner-card"><img src="assets/img/partner-paritet.jpg" alt="Паритет Кабельный завод" loading="lazy"></div>
-          <div class="partner-card"><img src="assets/img/partner-ostec.jpg" alt="OSTEC система инженерных трасс" loading="lazy"></div>
+          <div class="partner-card"><img src="assets/img/partner-eltex.png" alt="ELTEX" loading="lazy" width="280" height="100"></div>
+          <div class="partner-card"><img src="assets/img/partner-cnp.png" alt="CNP" loading="lazy" width="280" height="100"></div>
+          <div class="partner-card"><img src="assets/img/partner-aikon.png" alt="aikon" loading="lazy" width="280" height="100"></div>
+          <div class="partner-card"><img src="assets/img/partner-energocable.png" alt="АО Завод Энергокабель" loading="lazy" width="280" height="100"></div>
+          <div class="partner-card"><img src="assets/img/partner-paritet.png" alt="Паритет Кабельный завод" loading="lazy" width="280" height="100"></div>
+          <div class="partner-card"><img src="assets/img/partner-ostec.png" alt="OSTEC система инженерных трасс" loading="lazy" width="280" height="100"></div>
         </div>
       </div>
     </section>
@@ -199,46 +204,7 @@
         <p class="section__lead">В «Интекс-Электро» мы не просто комплектуем объекты — мы понимаем, как они работают.<br>Наши специалисты — это инженеры с опытом реализации крупных инфраструктурных задач.</p>
       </div>
       <div class="experience__photo">
-        <img src="assets/img/experience.jpg" alt="Инженер с планшетом у электрощита" loading="lazy" width="1920" height="1280">
-      </div>
-    </section>
-
-    <!-- Feedback form -->
-    <section class="section feedback" id="feedback">
-      <div class="container">
-        <p class="section__label">» Обратная связь</p>
-        <h2 class="section__title">Нужна консультация?</h2>
-        <p class="feedback__accent">Оставьте сообщение, и мы ответим вам</p>
-        <p class="section__lead">Наша компания готова стать надёжным поставщиком на ваши строительные объекты.<br>Мы уверены, что наше сотрудничество будет долгосрочным и результативным!</p>
-
-        <form class="form" id="lead-form" novalidate>
-          <div class="form__row">
-            <label class="form__field">
-              <span class="visually-hidden">Имя</span>
-              <input type="text" name="name" placeholder="Иван......" autocomplete="name" required>
-            </label>
-            <label class="form__field">
-              <span class="visually-hidden">Номер телефона</span>
-              <input type="tel" name="phone" placeholder="Номер телефона" autocomplete="tel" required>
-            </label>
-            <label class="form__field">
-              <span class="visually-hidden">Комментарий</span>
-              <input type="text" name="comment" placeholder="Комментарий" autocomplete="off">
-            </label>
-            <button type="submit" class="btn btn--gold form__submit">Оставить заявку</button>
-          </div>
-
-          <label class="form__check">
-            <input type="checkbox" name="offer" required>
-            <span>Я согласен с условиями <a href="#offer">оферты</a>.</span>
-          </label>
-          <label class="form__check">
-            <input type="checkbox" name="privacy" required>
-            <span>Я согласен на обработку моих персональных данных. С <a href="#privacy">политикой обработки персональных данных</a> ознакомлен.</span>
-          </label>
-
-          <p class="form__status" id="form-status" role="status" aria-live="polite" hidden></p>
-        </form>
+        <img src="assets/img/experience.jpg" alt="Инженер с планшетом у электрощита" loading="lazy" width="1600" height="1067">
       </div>
     </section>
 
@@ -277,14 +243,29 @@
         </div>
       </div>
 
+      <!--
+        Yandex Static API.
+        Coordinates: ул. Ясная, 31, Екатеринбург ≈ lon 60.577, lat 56.809
+        Key is public in client HTML — restrict by HTTP Referer in Yandex Cloud Console.
+      -->
       <div class="contacts__map">
-        <img src="assets/img/map.jpg" alt="Карта: Ясная улица, 31, Екатеринбург" loading="lazy" width="1844" height="804">
-        <div class="contacts__pin" aria-hidden="true">
-          <span class="contacts__pin-icon">
-            <img src="assets/img/logo.png" alt="" width="40" height="40">
-          </span>
-          <span class="contacts__pin-label">Ясная улица, 31</span>
-        </div>
+        <a
+          class="contacts__map-link"
+          href="https://yandex.ru/maps/?pt=60.577,56.809&z=16&l=map"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Открыть адрес на Яндекс.Картах: Ясная улица, 31"
+        >
+          <img
+            class="contacts__map-img"
+            src="https://static-maps.yandex.ru/v1?ll=60.577%2C56.809&z=15&size=1280%2C470&pt=60.577%2C56.809%2Cpm2rdm&lang=ru_RU&apikey=6c8b5e1b-e970-4665-80ed-d31c0f31c2a2"
+            alt="Карта: Ясная улица, 31, Екатеринбург"
+            width="1280"
+            height="470"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+        </a>
       </div>
     </section>
   </main>
@@ -303,17 +284,16 @@
       <div class="header__contacts">
         <a href="tel:+79043866590" class="header__phone">+7 (904) 386-65-90</a>
         <a href="tel:+73432712299" class="header__phone">+7 (343) 271-22-99</a>
-        <a href="#feedback" class="header__cta" aria-label="Оставить заявку">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Z" stroke="currentColor" stroke-width="1.6"/>
-            <circle cx="12" cy="9" r="2.2" stroke="currentColor" stroke-width="1.6"/>
-          </svg>
+        <a
+          href="https://max.ru/"
+          class="header__social"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Мы в MAX"
+        >
+          <img src="assets/img/max.svg" alt="MAX" width="28" height="28">
         </a>
       </div>
-    </div>
-    <div class="container footer__bottom">
-      <a href="#privacy" id="privacy">Политика конфиденциальности</a>
-      <a href="#offer" id="offer">Публичная оферта</a>
     </div>
   </footer>
 
