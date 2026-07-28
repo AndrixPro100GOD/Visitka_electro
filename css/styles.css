@@ -176,13 +176,15 @@ input {
   flex-shrink: 0;
   border-radius: 10px;
   overflow: hidden;
-  transition: transform var(--transition), opacity var(--transition);
+  transition: transform var(--transition), opacity var(--transition), filter var(--transition);
 }
 
 .header__social img {
   width: 28px;
   height: 28px;
   object-fit: contain;
+  /* monochrome fallback if color SVG is used */
+  filter: grayscale(1) contrast(1.05);
 }
 
 .header__social:hover {
@@ -477,10 +479,11 @@ input {
 }
 
 .partner-card {
-  display: grid;
-  place-items: center;
-  min-height: 148px;
-  padding: 28px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+  padding: 32px 28px;
   background: var(--bg-card);
   border: 1px solid var(--border);
   transition: border-color var(--transition), background var(--transition);
@@ -491,11 +494,13 @@ input {
   background: var(--bg-card-hover);
 }
 
-/* Equal visual height for all logos (transparent PNG) */
+/* Full logo visible, equal visual weight, no crop */
 .partner-card img {
-  width: 100%;
-  max-width: 240px;
-  height: 72px;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(100%, 260px);
+  max-height: 88px;
   object-fit: contain;
   object-position: center;
 }
@@ -595,14 +600,18 @@ input {
   width: 100%;
   height: 470px;
   overflow: hidden;
+  background: #0a0a0a;
 }
 
+/* Full-bleed crop; source ≥1280px wide, centered if viewport narrower */
 .experience__photo img {
+  display: block;
   width: 100%;
+  min-width: 1280px;
   height: 470px;
   object-fit: cover;
-  object-position: center;
-  display: block;
+  object-position: center center;
+  margin-inline: auto;
 }
 
 /* ===== Contacts ===== */
@@ -657,6 +666,7 @@ input {
   display: block;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .contacts__map-img {
@@ -665,12 +675,53 @@ input {
   object-fit: cover;
   object-position: center;
   display: block;
-  filter: grayscale(0.85) brightness(0.72) contrast(1.05);
+  filter: grayscale(0.75) brightness(0.7) contrast(1.05);
   transition: filter var(--transition);
 }
 
 .contacts__map-link:hover .contacts__map-img {
-  filter: grayscale(0.4) brightness(0.8) contrast(1.05);
+  filter: grayscale(0.35) brightness(0.82) contrast(1.05);
+}
+
+.contacts__map-pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.contacts__map-pin-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--gold);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  border: 2px solid #fff;
+}
+
+.contacts__map-pin-label {
+  padding: 6px 12px;
+  border-radius: 4px;
+  background: #fff;
+  color: #111;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.contacts__map-frame {
+  display: block;
+  width: 100%;
+  height: 470px;
+  border: 0;
+  filter: grayscale(0.7) brightness(0.75) contrast(1.05);
 }
 
 /* ===== Footer ===== */
@@ -826,8 +877,13 @@ input {
   .experience__photo,
   .experience__photo img,
   .contacts__map,
-  .contacts__map-img {
+  .contacts__map-img,
+  .contacts__map-frame {
     height: 280px;
+  }
+
+  .experience__photo img {
+    min-width: 100%;
   }
 
   .hero {
@@ -840,5 +896,14 @@ input {
 
   .hero__title {
     font-size: clamp(34px, 10vw, 48px);
+  }
+
+  .partner-card {
+    min-height: 140px;
+    padding: 24px 20px;
+  }
+
+  .partner-card img {
+    max-height: 72px;
   }
 }

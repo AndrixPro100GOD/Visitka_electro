@@ -146,12 +146,12 @@
         <p class="section__lead">Гарантируем оригинальность продукции и высокие стандарты качества.<br>Благодаря прямым контрактам с производителями, наши ценовые предложения<br>остаются оптимальными на рынке.</p>
 
         <div class="partners__grid">
-          <div class="partner-card"><img src="assets/img/partner-eltex.png" alt="ELTEX" loading="lazy" width="280" height="100"></div>
-          <div class="partner-card"><img src="assets/img/partner-cnp.png" alt="CNP" loading="lazy" width="280" height="100"></div>
-          <div class="partner-card"><img src="assets/img/partner-aikon.png" alt="aikon" loading="lazy" width="280" height="100"></div>
-          <div class="partner-card"><img src="assets/img/partner-energocable.png" alt="АО Завод Энергокабель" loading="lazy" width="280" height="100"></div>
-          <div class="partner-card"><img src="assets/img/partner-paritet.png" alt="Паритет Кабельный завод" loading="lazy" width="280" height="100"></div>
-          <div class="partner-card"><img src="assets/img/partner-ostec.png" alt="OSTEC система инженерных трасс" loading="lazy" width="280" height="100"></div>
+          <div class="partner-card"><img src="assets/img/partner-eltex.png" alt="ELTEX" loading="lazy"></div>
+          <div class="partner-card"><img src="assets/img/partner-cnp.png" alt="CNP" loading="lazy"></div>
+          <div class="partner-card"><img src="assets/img/partner-aikon.png" alt="aikon" loading="lazy"></div>
+          <div class="partner-card"><img src="assets/img/partner-energocable.png" alt="АО Завод Энергокабель" loading="lazy"></div>
+          <div class="partner-card"><img src="assets/img/partner-paritet.png" alt="Паритет Кабельный завод" loading="lazy"></div>
+          <div class="partner-card"><img src="assets/img/partner-ostec.png" alt="OSTEC система инженерных трасс" loading="lazy"></div>
         </div>
       </div>
     </section>
@@ -204,7 +204,7 @@
         <p class="section__lead">В «Интекс-Электро» мы не просто комплектуем объекты — мы понимаем, как они работают.<br>Наши специалисты — это инженеры с опытом реализации крупных инфраструктурных задач.</p>
       </div>
       <div class="experience__photo">
-        <img src="assets/img/experience.jpg" alt="Инженер с планшетом у электрощита" loading="lazy" width="1600" height="1067">
+        <img src="assets/img/experience.jpg" alt="Инженер с планшетом у электрощита" loading="lazy" width="1920" height="1280">
       </div>
     </section>
 
@@ -244,27 +244,30 @@
       </div>
 
       <!--
-        Yandex Static API.
-        Coordinates: ул. Ясная, 31, Екатеринбург ≈ lon 60.577, lat 56.809
-        Key is public in client HTML — restrict by HTTP Referer in Yandex Cloud Console.
+        Local static map (always works on GitHub Pages).
+        Click opens Yandex Maps. Interactive iframe fallback available below.
+        Coords: ул. Ясная, 31, Екатеринбург ≈ lon 60.577, lat 56.809
       -->
       <div class="contacts__map">
         <a
           class="contacts__map-link"
-          href="https://yandex.ru/maps/?pt=60.577,56.809&z=16&l=map"
+          href="https://yandex.ru/maps/?pt=60.577,56.809&z=16&l=map&text=%D0%AF%D1%81%D0%BD%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2031"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Открыть адрес на Яндекс.Картах: Ясная улица, 31"
         >
           <img
             class="contacts__map-img"
-            src="https://static-maps.yandex.ru/v1?ll=60.577%2C56.809&z=15&size=1280%2C470&pt=60.577%2C56.809%2Cpm2rdm&lang=ru_RU&apikey=6c8b5e1b-e970-4665-80ed-d31c0f31c2a2"
+            src="assets/img/map.jpg"
             alt="Карта: Ясная улица, 31, Екатеринбург"
             width="1280"
-            height="470"
+            height="886"
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
           >
+          <span class="contacts__map-pin" aria-hidden="true">
+            <span class="contacts__map-pin-dot"></span>
+            <span class="contacts__map-pin-label">Ясная улица, 31</span>
+          </span>
         </a>
       </div>
     </section>
