@@ -424,9 +424,10 @@ input {
 }
 
 /* ===== About ===== */
-.about {
+.section.about {
   background: var(--bg-elevated);
-  padding-top: 80px;
+  /* убрать верхний внутренний отступ секции */
+  padding-top: 0;
   padding-bottom: 0;
   overflow: hidden;
 }
@@ -435,7 +436,16 @@ input {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 48px;
-  align-items: center;
+  align-items: start;
+}
+
+.about__content {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.about__content .section__label {
+  margin-top: 0;
 }
 
 .about__text {
@@ -598,16 +608,18 @@ input {
 .experience__photo {
   margin-top: 40px;
   width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
   height: 470px;
   overflow: hidden;
   background: #0a0a0a;
 }
 
-/* Full-bleed crop; source ≥1280px wide, centered if viewport narrower */
+/* Cap visual width at 1280px */
 .experience__photo img {
   display: block;
   width: 100%;
-  min-width: 1280px;
+  max-width: 1280px;
   height: 470px;
   object-fit: cover;
   object-position: center center;
@@ -675,13 +687,13 @@ input {
   object-fit: cover;
   object-position: center;
   display: block;
-  /* Design map is already dark-themed — keep natural look */
+  /* Colorful scheme map — no grayscale/dark filters */
   filter: none;
   transition: opacity var(--transition);
 }
 
 .contacts__map-link:hover .contacts__map-img {
-  opacity: 0.92;
+  opacity: 0.95;
 }
 
 .contacts__map-pin {
@@ -883,8 +895,12 @@ input {
     height: 280px;
   }
 
+  .experience__photo {
+    max-width: 100%;
+  }
+
   .experience__photo img {
-    min-width: 100%;
+    max-width: 100%;
   }
 
   .hero {
