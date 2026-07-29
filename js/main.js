@@ -31,14 +31,88 @@
     link.addEventListener("click", closeMenu);
   });
 
-  /* Only one FAQ open at a time */
-  const faqItems = document.querySelectorAll(".faq__item");
+  /* Smooth FAQ accordion — height animation, no page jump */
+  const faqItems = Array.from(document.querySelectorAll(".faq__item"));
+
+  const getPanel = (item) => item.querySelector(".faq__answer");
+
+  const setExpanded = (item, expanded) => {
+    item.classList.toggle("is-open", expanded);
+    if (expanded) item.setAttribute("open", "");
+    else item.removeAttribute("open");
+    const summary = item.querySelector("summary");
+    summary?.setAttribute("aria-expanded", String(expanded));
+  };
+
+  const expandItem = (item) => {
+    const panel = getPanel(item);
+    if (!panel) return;
+
+    setExpanded(item, true);
+    panel.style.height = "0px";
+    // force reflow before animating to full height
+    void panel.offsetHeight;
+    panel.style.height = `${panel.scrollHeight}px`;
+
+    const onEnd = (e) => {
+      if (e.propertyName !== "height") return;
+      panel.removeEventListener("transitionend", onEnd);
+      if (item.classList.contains("is-open")) {
+        panel.style.height = "auto";
+      }
+    };
+    panel.addEventListener("transitionend", onEnd);
+  };
+
+  const collapseItem = (item) => {
+    const panel = getPanel(item);
+    if (!panel) return;
+
+    // lock current height then animate to 0
+    panel.style.height = `${panel.scrollHeight}px`;
+    void panel.offsetHeight;
+    panel.style.height = "0px";
+    setExpanded(item, false);
+  };
+
   faqItems.forEach((item) => {
-    item.addEventListener("toggle", () => {
-      if (!item.open) return;
+    const summary = item.querySelector("summary");
+    const panel = getPanel(item);
+    if (!summary || !panel) return;
+
+    // Initial state
+    if (item.hasAttribute("open")) {
+      setExpanded(item, true);
+      panel.style.height = "auto";
+    } else {
+      setExpanded(item, false);
+      panel.style.height = "0px";
+    }
+
+    summary.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const willOpen = !item.classList.contains("is-open");
+
+      // Close others smoothly first (same frame → stable layout)
       faqItems.forEach((other) => {
-        if (other !== item) other.open = false;
+        if (other !== item && other.classList.contains("is-open")) {
+          collapseItem(other);
+        }
       });
+
+      if (willOpen) expandItem(item);
+      else collapseItem(item);
+    });
+  });
+
+  // Keep open panel height correct on resize
+  window.addEventListener("resize", () => {
+    faqItems.forEach((item) => {
+      if (!item.classList.contains("is-open")) return;
+      const panel = getPanel(item);
+      if (panel) panel.style.height = "auto";
     });
   });
 

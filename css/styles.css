@@ -518,9 +518,11 @@ input {
 }
 
 /* ===== FAQ ===== */
-.faq {
+.section.faq {
   background: var(--bg);
-  padding-top: 40px;
+  padding-top: 80px;
+  /* tighter gap before «Опыт» */
+  padding-bottom: 32px;
 }
 
 .faq__list {
@@ -543,14 +545,17 @@ input {
   font-size: 18px;
   font-weight: 500;
   color: var(--text-soft);
-  transition: color var(--transition);
+  transition: color 0.3s ease;
+  /* avoid focus scroll jump on some browsers */
+  scroll-margin: 0;
 }
 
 .faq__item summary::-webkit-details-marker {
   display: none;
 }
 
-.faq__item[open] summary {
+.faq__item[open] summary,
+.faq__item.is-open summary {
   color: var(--gold);
 }
 
@@ -569,7 +574,7 @@ input {
   left: 50%;
   background: var(--gold);
   transform: translate(-50%, -50%);
-  transition: transform var(--transition), opacity var(--transition);
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .faq__icon::before {
@@ -582,14 +587,24 @@ input {
   height: 16px;
 }
 
-.faq__item[open] .faq__icon::after {
+.faq__item[open] .faq__icon::after,
+.faq__item.is-open .faq__icon::after {
   opacity: 0;
   transform: translate(-50%, -50%) rotate(90deg);
 }
 
+/* Animated panel: height driven by JS, body clips content */
 .faq__answer {
-  padding: 0 8px 28px;
   max-width: 960px;
+  padding: 0 8px;
+  overflow: hidden;
+  height: 0;
+  transition: height 0.35s ease;
+  will-change: height;
+}
+
+.faq__answer-body {
+  padding-bottom: 28px;
 }
 
 .faq__answer p {
@@ -603,7 +618,9 @@ input {
 }
 
 /* ===== Experience ===== */
-.experience {
+.section.experience {
+  /* pull closer to FAQ — no double 100px gap */
+  padding-top: 48px;
   padding-bottom: 0;
 }
 
