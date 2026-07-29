@@ -57,6 +57,15 @@
     const caption = el.dataset.caption || "Ясная улица, 31";
     const center = [lat, lon];
 
+    // Full Yandex Maps page with point + search text
+    const mapsUrl =
+      `https://yandex.ru/maps/?pt=${lon},${lat}&z=16&l=map` +
+      `&text=${encodeURIComponent(caption)}`;
+
+    const openMaps = () => {
+      window.open(mapsUrl, "_blank", "noopener,noreferrer");
+    };
+
     ymaps.ready(() => {
       const map = new ymaps.Map(
         el,
@@ -67,13 +76,12 @@
           type: "yandex#map",
         },
         {
-          // hide «Открыть в Яндекс.Картах» promo block if present
           suppressMapOpenBlock: true,
           yandexMapDisablePoiInteractivity: true,
         }
       );
 
-      // Non-interactive: no pan/zoom/scroll
+      // No pan/zoom — only click to open full maps
       map.behaviors.disable([
         "drag",
         "multiTouch",
@@ -83,14 +91,11 @@
         "leftMouseButtonMagnifier",
       ]);
 
-      // Native placemark with text caption drawn by Maps API
       const placemark = new ymaps.Placemark(
         center,
         {
           iconCaption: caption,
-          hintContent: caption,
-          balloonContentHeader: "Интекс-Электро",
-          balloonContentBody: `${caption}<br>оф. 107, Екатеринбург`,
+          hintContent: `${caption} — открыть в Яндекс.Картах`,
         },
         {
           preset: "islands#brownCircleDotIconWithCaption",
@@ -99,13 +104,29 @@
           hasHint: true,
           openBalloonOnClick: false,
           openEmptyBalloon: false,
-          cursor: "default",
+          cursor: "pointer",
         }
       );
 
       map.geoObjects.add(placemark);
 
-      // Keep caption visible; reflow after container paint
+      map.events.add("click", openMaps);
+      placemark.events.add("click", (e) => {
+        e.stopPropagation();
+        openMaps();
+      });
+
+      el.classList.add("contacts__map--clickable");
+      el.title = "Открыть в Яндекс.Картах";
+      el.setAttribute("role", "link");
+      el.tabIndex = 0;
+      el.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openMaps();
+        }
+      });
+
       map.container.fitToViewport();
     });
   };

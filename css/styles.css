@@ -677,7 +677,15 @@ input {
   background: #1a1a1a;
 }
 
-/* Soften default Yandex copyright area contrast on dark site */
+.contacts__map--clickable {
+  cursor: pointer;
+}
+
+.contacts__map--clickable:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
+}
+
 .contacts__map ymaps,
 .contacts__map .ymaps-2-1-79-map {
   filter: none;
