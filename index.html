@@ -244,29 +244,21 @@
       </div>
 
       <!--
-        Yandex Maps widget: full-width sharp tiles, moderate zoom (z=13), placemark.
-        Coords: ул. Ясная, 31, Екатеринбург ≈ lon 60.5645, lat 56.8078
+        Yandex Maps JS API 2.1 (non-interactive):
+        native Placemark + iconCaption «Ясная улица, 31».
+        Coords: [lat, lon] = [56.8078, 60.5645]
+        Docs: https://yandex.ru/dev/jsapi-v2-1/doc/ru/
       -->
-      <div class="contacts__map">
-        <iframe
-          class="contacts__map-frame"
-          title="Карта: Ясная улица, 31, Екатеринбург"
-          src="https://yandex.ru/map-widget/v1/?ll=60.5645%2C56.8078&z=13&pt=60.5645%2C56.8078&l=map&lang=ru_RU"
-          loading="lazy"
-          allowfullscreen
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
-        <div class="contacts__map-badge" aria-hidden="true">
-          <span class="contacts__map-badge-dot"></span>
-          <span class="contacts__map-badge-text">Ясная улица, 31</span>
-        </div>
-        <a
-          class="contacts__map-open"
-          href="https://yandex.ru/maps/?pt=60.5645,56.8078&z=15&l=map&text=%D0%AF%D1%81%D0%BD%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2031"
-          target="_blank"
-          rel="noopener noreferrer"
-        >Открыть в Яндекс.Картах</a>
-      </div>
+      <div
+        class="contacts__map"
+        id="yandex-map"
+        role="img"
+        aria-label="Карта: Ясная улица, 31, Екатеринбург"
+        data-lat="56.8078"
+        data-lon="60.5645"
+        data-zoom="13"
+        data-caption="Ясная улица, 31"
+      ></div>
     </section>
   </main>
 
@@ -297,6 +289,11 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <!-- Yandex Maps JS API 2.1 — key from project Static/Maps cabinet -->
+  <script
+    src="https://api-maps.yandex.ru/2.1/?apikey=6c8b5e1b-e970-4665-80ed-d31c0f31c2a2&lang=ru_RU"
+    defer
+  ></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>

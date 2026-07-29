@@ -41,4 +41,81 @@
       });
     });
   });
+
+  /**
+   * Yandex Maps JS API 2.1 — non-interactive map with native geo elements.
+   * Placemark + iconCaption are drawn by the API (not CSS overlays).
+   * Docs: Placemark, Map.behaviors, islands presets.
+   */
+  const initYandexMap = () => {
+    const el = document.getElementById("yandex-map");
+    if (!el || typeof ymaps === "undefined") return;
+
+    const lat = parseFloat(el.dataset.lat || "56.8078");
+    const lon = parseFloat(el.dataset.lon || "60.5645");
+    const zoom = parseInt(el.dataset.zoom || "13", 10);
+    const caption = el.dataset.caption || "Ясная улица, 31";
+    const center = [lat, lon];
+
+    ymaps.ready(() => {
+      const map = new ymaps.Map(
+        el,
+        {
+          center,
+          zoom,
+          controls: [],
+          type: "yandex#map",
+        },
+        {
+          // hide «Открыть в Яндекс.Картах» promo block if present
+          suppressMapOpenBlock: true,
+          yandexMapDisablePoiInteractivity: true,
+        }
+      );
+
+      // Non-interactive: no pan/zoom/scroll
+      map.behaviors.disable([
+        "drag",
+        "multiTouch",
+        "scrollZoom",
+        "dblClickZoom",
+        "rightMouseButtonMagnifier",
+        "leftMouseButtonMagnifier",
+      ]);
+
+      // Native placemark with text caption drawn by Maps API
+      const placemark = new ymaps.Placemark(
+        center,
+        {
+          iconCaption: caption,
+          hintContent: caption,
+          balloonContentHeader: "Интекс-Электро",
+          balloonContentBody: `${caption}<br>оф. 107, Екатеринбург`,
+        },
+        {
+          preset: "islands#brownCircleDotIconWithCaption",
+          iconCaptionMaxWidth: "220",
+          hasBalloon: false,
+          hasHint: true,
+          openBalloonOnClick: false,
+          openEmptyBalloon: false,
+          cursor: "default",
+        }
+      );
+
+      map.geoObjects.add(placemark);
+
+      // Keep caption visible; reflow after container paint
+      map.container.fitToViewport();
+    });
+  };
+
+  if (typeof ymaps !== "undefined") {
+    initYandexMap();
+  } else {
+    // Script may still be loading (defer order)
+    window.addEventListener("load", () => {
+      if (typeof ymaps !== "undefined") initYandexMap();
+    });
+  }
 })();

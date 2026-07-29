@@ -667,6 +667,7 @@ input {
   color: var(--gold) !important;
 }
 
+/* Yandex Maps JS API container — full width, sharp tiles */
 .contacts__map {
   position: relative;
   margin-top: 0;
@@ -676,69 +677,10 @@ input {
   background: #1a1a1a;
 }
 
-/* Interactive Yandex tiles — sharp at any width */
-.contacts__map-frame {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
+/* Soften default Yandex copyright area contrast on dark site */
+.contacts__map ymaps,
+.contacts__map .ymaps-2-1-79-map {
   filter: none;
-}
-
-/* Visible GEO point label */
-.contacts__map-badge {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, calc(-100% - 28px));
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  background: rgba(18, 18, 18, 0.92);
-  border: 1px solid rgba(201, 169, 106, 0.45);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
-  pointer-events: none;
-  z-index: 2;
-  max-width: calc(100% - 32px);
-}
-
-.contacts__map-badge-dot {
-  flex: 0 0 12px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--gold);
-  box-shadow: 0 0 0 3px rgba(201, 169, 106, 0.25);
-}
-
-.contacts__map-badge-text {
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
-}
-
-.contacts__map-open {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-  z-index: 2;
-  padding: 10px 14px;
-  border-radius: 6px;
-  background: rgba(18, 18, 18, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: var(--gold);
-  font-size: 13px;
-  font-weight: 600;
-  transition: background var(--transition), border-color var(--transition);
-}
-
-.contacts__map-open:hover {
-  background: rgba(30, 30, 30, 0.95);
-  border-color: rgba(201, 169, 106, 0.4);
 }
 
 /* ===== Footer ===== */
@@ -904,17 +846,6 @@ input {
 
   .contacts__map {
     height: 320px;
-  }
-
-  .contacts__map-badge-text {
-    font-size: 13px;
-  }
-
-  .contacts__map-open {
-    right: 12px;
-    bottom: 12px;
-    font-size: 12px;
-    padding: 8px 12px;
   }
 
   .experience__photo {
