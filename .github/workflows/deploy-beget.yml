@@ -1,0 +1,50 @@
+# Deploy static site to Beget via FTP
+# Secrets (Settings → Secrets and variables → Actions):
+#   FTP_SERVER      — host, e.g. ftp.beget.com or your server IP
+#   FTP_USERNAME    — FTP login
+#   FTP_PASSWORD    — FTP password
+# Optional:
+#   FTP_SERVER_DIR  — remote path, e.g. ./public_html/ or ./site.ru/public_html/
+name: Deploy to Beget
+
+on:
+  push:
+    branches: [master, main]
+  workflow_dispatch:
+
+concurrency:
+  group: beget-ftp-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # Remote folder on Beget (set secret FTP_SERVER_DIR if not site root)
+          # Example: ./public_html/  or  ./yourdomain.ru/public_html/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          local-dir: ./
+          protocol: ftp
+          # false — sync without wiping the whole remote folder first
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/node_modules/**
+            **/References_pdf/**
+            README.md
+            .gitignore
+            .env
+            .env.*
+            **/.DS_Store
+            **/Thumbs.db
