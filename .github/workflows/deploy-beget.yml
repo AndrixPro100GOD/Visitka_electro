@@ -29,9 +29,10 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # Remote folder on Beget (set secret FTP_SERVER_DIR if not site root)
-          # Example: ./public_html/  or  ./yourdomain.ru/public_html/
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          # Remote folder on Beget. Secret FTP_SERVER_DIR optional, e.g.:
+          #   ./public_html/  or  ./yourdomain.ru/public_html/
+          # If secret is empty, defaults to ./
+          server-dir: ${{ secrets.FTP_SERVER_DIR != '' && secrets.FTP_SERVER_DIR || './' }}
           local-dir: ./
           protocol: ftp
           # false — sync without wiping the whole remote folder first
