@@ -1,5 +1,8 @@
-# Reference materials (not for GitHub Pages)
+# Reference materials
 References_pdf/
+
+# Original cert dumps (Cyrillic names); published copies live in assets/certs/
+assets/dealer certs/
 
 # OS / editor
 .DS_Store

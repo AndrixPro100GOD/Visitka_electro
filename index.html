@@ -15,28 +15,36 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <!-- Header -->
+  <!-- Header: logo larger / overflows thin nav bar -->
   <header class="header" id="header">
     <div class="container header__inner">
       <a href="#top" class="logo" aria-label="Интекс-Электро — на главную">
-        <img src="assets/img/logo.png" alt="Интекс-Электро" width="200" height="133">
+        <img src="assets/img/logo.png" alt="Интекс-Электро" width="280" height="186">
       </a>
 
       <nav class="nav" id="nav" aria-label="Основная навигация">
         <a href="#products" class="nav__link">Продукция</a>
         <a href="#about" class="nav__link">О нас</a>
+        <a href="#certs" class="nav__link">Сертификаты</a>
         <a href="#contacts" class="nav__link">Контакты</a>
       </nav>
 
       <div class="header__contacts">
         <a href="tel:+79043866590" class="header__phone">+7 (904) 386-65-90</a>
         <a href="tel:+73432712299" class="header__phone">+7 (343) 271-22-99</a>
+        <!--
+          MAX: публичной ссылки вида wa.me/номер нет.
+          Открываем веб-клиент; номер в query — для удобства и будущих deep-link.
+          Когда появится профиль max.ru/u/… — замените href на него.
+        -->
         <a
-          href="https://max.ru/"
+          href="https://web.max.ru/"
           class="header__social"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Мы в MAX"
+          aria-label="Написать в MAX: +7 (904) 386-65-90"
+          title="MAX: +7 (904) 386-65-90"
+          data-max-phone="79043866590"
         >
           <img src="assets/img/max.svg" alt="MAX" width="28" height="28">
         </a>
@@ -57,8 +65,7 @@
         <div class="hero__grid">
           <div class="hero__content">
             <h1 class="hero__title">Проводник<br>ваших<br>инженерных<br>решений</h1>
-            <p class="hero__subtitle">Интекс-электро — обеспечение инфраструктуры<br>для крупных строительных объектов</p>
-            <a href="#contacts" class="btn btn--gold">Заказать звонок</a>
+            <a href="#contacts" class="btn btn--gold">Обсудить заказ</a>
           </div>
           <ul class="hero__features" aria-label="Преимущества">
             <li>» Персональное отношение</li>
@@ -70,52 +77,92 @@
       </div>
     </section>
 
-    <!-- Products -->
+    <!-- Products — infinite marquee, pause on hover -->
     <section class="section products" id="products">
       <div class="container">
         <p class="section__label">» Энергия в деталях</p>
         <h2 class="section__title">Надёжный фундамент<br>энергосистемы</h2>
+      </div>
 
-        <div class="products__grid">
-          <article class="product-card">
-            <div class="product-card__media">
-              <img src="assets/img/product-switchgear.png" alt="Электрощитовое оборудование" loading="lazy" width="492" height="398">
-            </div>
-            <div class="product-card__body">
-              <span class="product-card__tag">Продукция компании</span>
-              <h3 class="product-card__title">Электрощитовое<br>и низковольтное оборудование</h3>
-            </div>
-          </article>
-
-          <article class="product-card">
-            <div class="product-card__media">
-              <img src="assets/img/product-cables.png" alt="Кабельная продукция" loading="lazy" width="610" height="393">
-            </div>
-            <div class="product-card__body">
-              <span class="product-card__tag">Продукция компании</span>
-              <h3 class="product-card__title">Кабельная продукция</h3>
-            </div>
-          </article>
-
-          <article class="product-card">
-            <div class="product-card__media">
-              <img src="assets/img/product-cable-trays.png" alt="Кабеленесущие системы" loading="lazy" width="714" height="380">
-            </div>
-            <div class="product-card__body">
-              <span class="product-card__tag">Продукция компании</span>
-              <h3 class="product-card__title">Кабеленесущие системы</h3>
-            </div>
-          </article>
-
-          <article class="product-card">
-            <div class="product-card__media">
-              <img src="assets/img/product-lighting.png" alt="Системы освещения" loading="lazy" width="724" height="401">
-            </div>
-            <div class="product-card__body">
-              <span class="product-card__tag">Продукция компании</span>
-              <h3 class="product-card__title">Системы освещения<br>и осветительные устройства</h3>
-            </div>
-          </article>
+      <div class="marquee marquee--products" aria-label="Продукция компании">
+        <div class="marquee__track">
+          <div class="marquee__group">
+            <article class="product-card">
+              <div class="product-card__media">
+                <img src="assets/img/product-switchgear.png" alt="Электрощитовое оборудование" loading="lazy" width="492" height="398">
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__tag">Продукция компании</span>
+                <h3 class="product-card__title">Электрощитовое<br>и низковольтное оборудование</h3>
+              </div>
+            </article>
+            <article class="product-card">
+              <div class="product-card__media">
+                <img src="assets/img/product-cables.png" alt="Кабельная продукция" loading="lazy" width="610" height="393">
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__tag">Продукция компании</span>
+                <h3 class="product-card__title">Кабельная продукция</h3>
+              </div>
+            </article>
+            <article class="product-card">
+              <div class="product-card__media">
+                <img src="assets/img/product-cable-trays.png" alt="Кабеленесущие системы" loading="lazy" width="714" height="380">
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__tag">Продукция компании</span>
+                <h3 class="product-card__title">Кабеленесущие системы</h3>
+              </div>
+            </article>
+            <article class="product-card">
+              <div class="product-card__media">
+                <img src="assets/img/product-lighting.png" alt="Системы освещения" loading="lazy" width="724" height="401">
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__tag">Продукция компании</span>
+                <h3 class="product-card__title">Системы освещения<br>и осветительные устройства</h3>
+              </div>
+            </article>
+          </div>
+          <!-- duplicate for seamless loop -->
+          <div class="marquee__group" aria-hidden="true">
+            <article class="product-card">
+              <div class="product-card__media">
+                <img src="assets/img/product-switchgear.png" alt="" loading="lazy" width="492" height="398">
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__tag">Продукция компании</span>
+                <h3 class="product-card__title">Электрощитовое<br>и низковольтное оборудование</h3>
+              </div>
+            </article>
+            <article class="product-card">
+              <div class="product-card__media">
+                <img src="assets/img/product-cables.png" alt="" loading="lazy" width="610" height="393">
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__tag">Продукция компании</span>
+                <h3 class="product-card__title">Кабельная продукция</h3>
+              </div>
+            </article>
+            <article class="product-card">
+              <div class="product-card__media">
+                <img src="assets/img/product-cable-trays.png" alt="" loading="lazy" width="714" height="380">
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__tag">Продукция компании</span>
+                <h3 class="product-card__title">Кабеленесущие системы</h3>
+              </div>
+            </article>
+            <article class="product-card">
+              <div class="product-card__media">
+                <img src="assets/img/product-lighting.png" alt="" loading="lazy" width="724" height="401">
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__tag">Продукция компании</span>
+                <h3 class="product-card__title">Системы освещения<br>и осветительные устройства</h3>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
     </section>
@@ -138,20 +185,85 @@
       </div>
     </section>
 
-    <!-- Partners -->
+    <!-- Partners — infinite marquee for many logos -->
     <section class="section partners" id="partners">
       <div class="container">
         <p class="section__label">» Наши партнеры</p>
-        <h2 class="section__title">Наша компания является<br>официальным дистрибьютором<br>компаний</h2>
-        <p class="section__lead">Гарантируем оригинальность продукции и высокие стандарты качества.<br>Благодаря прямым контрактам с производителями, наши ценовые предложения<br>остаются оптимальными на рынке.</p>
+        <h2 class="section__title">Официальные дилеры<br>и субдилеры</h2>
+        <p class="section__lead">Мы работаем как официальные дилеры и субдилеры производителей.<br>Гарантируем оригинальность продукции и высокие стандарты качества.<br>Благодаря прямым контрактам, наши ценовые предложения остаются оптимальными на рынке.</p>
+      </div>
 
-        <div class="partners__grid">
-          <div class="partner-card"><img src="assets/img/partner-eltex.png" alt="ELTEX" loading="lazy"></div>
-          <div class="partner-card"><img src="assets/img/partner-cnp.png" alt="CNP" loading="lazy"></div>
-          <div class="partner-card"><img src="assets/img/partner-aikon.png" alt="aikon" loading="lazy"></div>
-          <div class="partner-card"><img src="assets/img/partner-energocable.png" alt="АО Завод Энергокабель" loading="lazy"></div>
-          <div class="partner-card"><img src="assets/img/partner-paritet.png" alt="Паритет Кабельный завод" loading="lazy"></div>
-          <div class="partner-card"><img src="assets/img/partner-ostec.png" alt="OSTEC система инженерных трасс" loading="lazy"></div>
+      <div class="marquee marquee--partners" aria-label="Логотипы партнёров">
+        <div class="marquee__track">
+          <div class="marquee__group">
+            <div class="partner-card"><img src="assets/img/partner-eltex.png" alt="ELTEX" loading="lazy"></div>
+            <div class="partner-card"><img src="assets/img/partner-cnp.png" alt="CNP" loading="lazy"></div>
+            <div class="partner-card"><img src="assets/img/partner-aikon.png" alt="aikon" loading="lazy"></div>
+            <div class="partner-card"><img src="assets/img/partner-energocable.png" alt="АО Завод Энергокабель" loading="lazy"></div>
+            <div class="partner-card"><img src="assets/img/partner-paritet.png" alt="Паритет Кабельный завод" loading="lazy"></div>
+            <div class="partner-card"><img src="assets/img/partner-ostec.png" alt="OSTEC система инженерных трасс" loading="lazy"></div>
+          </div>
+          <div class="marquee__group" aria-hidden="true">
+            <div class="partner-card"><img src="assets/img/partner-eltex.png" alt="" loading="lazy"></div>
+            <div class="partner-card"><img src="assets/img/partner-cnp.png" alt="" loading="lazy"></div>
+            <div class="partner-card"><img src="assets/img/partner-aikon.png" alt="" loading="lazy"></div>
+            <div class="partner-card"><img src="assets/img/partner-energocable.png" alt="" loading="lazy"></div>
+            <div class="partner-card"><img src="assets/img/partner-paritet.png" alt="" loading="lazy"></div>
+            <div class="partner-card"><img src="assets/img/partner-ostec.png" alt="" loading="lazy"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificates -->
+    <section class="section certs" id="certs">
+      <div class="container">
+        <p class="section__label">» Документы</p>
+        <h2 class="section__title">Дилерские сертификаты</h2>
+        <p class="section__lead">Подтверждение официального статуса дилера / субдилера.<br>Можно открыть в браузере или скачать PDF.</p>
+
+        <div class="certs__grid">
+          <a class="cert-card" href="assets/certs/cert-dealer.pdf" target="_blank" rel="noopener noreferrer">
+            <div class="cert-card__icon" aria-hidden="true">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M14 3v5h5M9 13h6M9 17h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="cert-card__body">
+              <h3 class="cert-card__title">Дилерский сертификат</h3>
+              <p class="cert-card__meta">ООО «Интекс-Электро» · PDF</p>
+            </div>
+            <span class="cert-card__action">Открыть / скачать</span>
+          </a>
+
+          <a class="cert-card" href="assets/certs/cert-navigator.pdf" target="_blank" rel="noopener noreferrer">
+            <div class="cert-card__icon" aria-hidden="true">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M14 3v5h5M9 13h6M9 17h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="cert-card__body">
+              <h3 class="cert-card__title">Сертификат Navigator</h3>
+              <p class="cert-card__meta">ООО «Интекс-Электро» · PDF</p>
+            </div>
+            <span class="cert-card__action">Открыть / скачать</span>
+          </a>
+
+          <a class="cert-card" href="assets/certs/cert-onlight.pdf" target="_blank" rel="noopener noreferrer">
+            <div class="cert-card__icon" aria-hidden="true">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M14 3v5h5M9 13h6M9 17h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="cert-card__body">
+              <h3 class="cert-card__title">Сертификат Онлайт</h3>
+              <p class="cert-card__meta">ООО «Интекс-Электро» · PDF</p>
+            </div>
+            <span class="cert-card__action">Открыть / скачать</span>
+          </a>
         </div>
       </div>
     </section>
@@ -182,7 +294,7 @@
             </summary>
             <div class="faq__answer">
               <div class="faq__answer-body">
-                <p>Мы работаем как официальный дистрибьютор производителей: поставляем оригинальную продукцию с сертификатами соответствия, гарантией завода и прозрачной прослеживаемостью партий. Перед отгрузкой контролируем комплектность и соответствие спецификации проекта.</p>
+                <p>Мы работаем как официальные дилеры и субдилеры производителей: поставляем оригинальную продукцию с сертификатами соответствия, гарантией завода и прозрачной прослеживаемостью партий. Перед отгрузкой контролируем комплектность и соответствие спецификации проекта.</p>
               </div>
             </div>
           </details>
@@ -235,6 +347,10 @@
             <p>620146, г. Екатеринбург, ул.<br>Ясная, дом 31, оф. 107</p>
           </div>
           <div class="contacts__item">
+            <span class="contacts__label">Адрес ОП:</span>
+            <p>299009, г. Севастополь,<br>ул. Василия Колодкина, дом 33</p>
+          </div>
+          <div class="contacts__item">
             <span class="contacts__label">Электронная почта:</span>
             <a class="contacts__mail" href="mailto:oooIntexelectro@mail.ru">oooIntexelectro@mail.ru</a>
           </div>
@@ -249,12 +365,6 @@
         </div>
       </div>
 
-      <!--
-        Yandex Maps JS API 2.1 (non-interactive):
-        native Placemark + iconCaption «Ясная улица, 31».
-        Coords: [lat, lon] = [56.8078, 60.5645]
-        Docs: https://yandex.ru/dev/jsapi-v2-1/doc/ru/
-      -->
       <div
         class="contacts__map"
         id="yandex-map"
@@ -272,22 +382,25 @@
   <footer class="footer">
     <div class="container footer__top">
       <a href="#top" class="logo logo--footer">
-        <img src="assets/img/logo.png" alt="Интекс-Электро" width="180" height="120">
+        <img src="assets/img/logo.png" alt="Интекс-Электро" width="200" height="133">
       </a>
       <nav class="nav nav--footer" aria-label="Навигация в подвале">
         <a href="#products" class="nav__link">Продукция</a>
         <a href="#about" class="nav__link">О нас</a>
+        <a href="#certs" class="nav__link">Сертификаты</a>
         <a href="#contacts" class="nav__link">Контакты</a>
       </nav>
       <div class="header__contacts">
         <a href="tel:+79043866590" class="header__phone">+7 (904) 386-65-90</a>
         <a href="tel:+73432712299" class="header__phone">+7 (343) 271-22-99</a>
         <a
-          href="https://max.ru/"
+          href="https://web.max.ru/"
           class="header__social"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Мы в MAX"
+          aria-label="Написать в MAX: +7 (904) 386-65-90"
+          title="MAX: +7 (904) 386-65-90"
+          data-max-phone="79043866590"
         >
           <img src="assets/img/max.svg" alt="MAX" width="28" height="28">
         </a>
@@ -295,7 +408,6 @@
     </div>
   </footer>
 
-  <!-- Yandex Maps JS API 2.1 — key from project Static/Maps cabinet -->
   <script
     src="https://api-maps.yandex.ru/2.1/?apikey=6c8b5e1b-e970-4665-80ed-d31c0f31c2a2&lang=ru_RU"
     defer

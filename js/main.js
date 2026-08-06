@@ -11,6 +11,20 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
+  /*
+   * MAX messenger: no public wa.me-style phone deep-link.
+   * Open web client and put the business number on the clipboard
+   * so the user can start a chat with +7 (904) 386-65-90 quickly.
+   */
+  document.querySelectorAll("[data-max-phone]").forEach((link) => {
+    link.addEventListener("click", () => {
+      const phone = link.getAttribute("data-max-phone");
+      if (!phone || !navigator.clipboard?.writeText) return;
+      const pretty = phone.startsWith("7") ? `+${phone}` : phone;
+      navigator.clipboard.writeText(pretty).catch(() => {});
+    });
+  });
+
   /* Mobile menu */
   const closeMenu = () => {
     burger?.classList.remove("is-open");
