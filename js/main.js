@@ -131,6 +131,193 @@
   });
 
   /**
+   * Seamless infinite marquee (products + partners).
+   * - One source group in HTML; we clone it for a perfect loop (no gap).
+   * - Auto-scroll via rAF; offset wraps by exact set width.
+   * - Hover: pause auto, wheel / drag to scroll horizontally.
+   */
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  const initMarquee = (root) => {
+    const viewport = root.querySelector(".marquee__viewport");
+    const track = root.querySelector(".marquee__track");
+    const source = track?.querySelector(".marquee__group");
+    if (!viewport || !track || !source) return;
+
+    // Remove any previous clones (e.g. hot reload)
+    track.querySelectorAll(".marquee__group--clone").forEach((n) => n.remove());
+
+    const clone = source.cloneNode(true);
+    clone.classList.add("marquee__group--clone");
+    clone.setAttribute("aria-hidden", "true");
+    clone.querySelectorAll("img").forEach((img) => {
+      img.alt = "";
+      img.removeAttribute("loading");
+    });
+    track.appendChild(clone);
+
+    let setWidth = 0;
+    let offset = 0;
+    let paused = false;
+    let dragging = false;
+    let lastX = 0;
+    let rafId = 0;
+    const speed = parseFloat(root.dataset.speed || "0.4"); // px per frame @60fps
+
+    const measure = () => {
+      // scrollWidth of one group including its trailing padding
+      setWidth = source.getBoundingClientRect().width;
+      // If images load late, re-measure
+      if (setWidth < 1) return;
+      // Keep offset in range after resize
+      if (setWidth > 0) {
+        offset = ((offset % setWidth) + setWidth) % setWidth;
+        apply();
+      }
+    };
+
+    const apply = () => {
+      track.style.transform = `translate3d(${-offset}px, 0, 0)`;
+    };
+
+    const wrap = () => {
+      if (setWidth <= 0) return;
+      // Keep offset in [0, setWidth)
+      offset = ((offset % setWidth) + setWidth) % setWidth;
+    };
+
+    const tick = () => {
+      if (!paused && !dragging && !prefersReducedMotion && setWidth > 0) {
+        offset += speed;
+        wrap();
+        apply();
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+
+    // Wheel → horizontal when pointer is over the marquee
+    viewport.addEventListener(
+      "wheel",
+      (e) => {
+        if (setWidth <= 0) return;
+        // Prefer vertical wheel as horizontal strip control
+        const delta =
+          Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        if (delta === 0) return;
+        e.preventDefault();
+        paused = true;
+        root.classList.add("is-paused");
+        offset += delta;
+        wrap();
+        apply();
+      },
+      { passive: false }
+    );
+
+    // Pointer drag
+    viewport.addEventListener("pointerdown", (e) => {
+      if (e.button !== 0) return;
+      dragging = true;
+      paused = true;
+      lastX = e.clientX;
+      root.classList.add("is-dragging", "is-paused");
+      viewport.setPointerCapture(e.pointerId);
+    });
+
+    viewport.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+      const dx = e.clientX - lastX;
+      lastX = e.clientX;
+      offset -= dx;
+      wrap();
+      apply();
+    });
+
+    const endDrag = (e) => {
+      if (!dragging) return;
+      dragging = false;
+      root.classList.remove("is-dragging");
+      try {
+        viewport.releasePointerCapture(e.pointerId);
+      } catch (_) {
+        /* ignore */
+      }
+    };
+    viewport.addEventListener("pointerup", endDrag);
+    viewport.addEventListener("pointercancel", endDrag);
+
+    // Hover: pause auto; leave: resume (unless reduced motion)
+    root.addEventListener("mouseenter", () => {
+      paused = true;
+      root.classList.add("is-paused");
+    });
+    root.addEventListener("mouseleave", () => {
+      if (dragging) return;
+      if (!prefersReducedMotion) {
+        paused = false;
+        root.classList.remove("is-paused");
+      }
+    });
+
+    // Measure after layout + images
+    const ro = new ResizeObserver(() => measure());
+    ro.observe(source);
+    ro.observe(viewport);
+
+    const imgs = source.querySelectorAll("img");
+    let pending = imgs.length;
+    if (pending === 0) measure();
+    else {
+      imgs.forEach((img) => {
+        if (img.complete) {
+          pending -= 1;
+          if (pending === 0) measure();
+        } else {
+          img.addEventListener(
+            "load",
+            () => {
+              pending -= 1;
+              if (pending === 0) measure();
+            },
+            { once: true }
+          );
+          img.addEventListener(
+            "error",
+            () => {
+              pending -= 1;
+              if (pending === 0) measure();
+            },
+            { once: true }
+          );
+        }
+      });
+    }
+
+    // Safety remeasure
+    requestAnimationFrame(() => {
+      measure();
+      requestAnimationFrame(measure);
+    });
+    window.addEventListener("load", measure);
+
+    if (prefersReducedMotion) {
+      paused = true;
+      root.classList.add("is-paused");
+    }
+
+    rafId = requestAnimationFrame(tick);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      ro.disconnect();
+    };
+  };
+
+  document.querySelectorAll("[data-marquee]").forEach(initMarquee);
+
+  /**
    * Yandex Maps JS API 2.1 — non-interactive map with native geo elements.
    * Placemark + iconCaption are drawn by the API (not CSS overlays).
    * Docs: Placemark, Map.behaviors, islands presets.

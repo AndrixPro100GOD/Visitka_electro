@@ -84,84 +84,57 @@
         <h2 class="section__title">Надёжный фундамент<br>энергосистемы</h2>
       </div>
 
-      <div class="marquee marquee--products" aria-label="Продукция компании">
-        <div class="marquee__track">
-          <div class="marquee__group">
-            <article class="product-card">
-              <div class="product-card__media">
-                <img src="assets/img/product-switchgear.png" alt="Электрощитовое оборудование" loading="lazy" width="492" height="398">
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__tag">Продукция компании</span>
-                <h3 class="product-card__title">Электрощитовое<br>и низковольтное оборудование</h3>
-              </div>
-            </article>
-            <article class="product-card">
-              <div class="product-card__media">
-                <img src="assets/img/product-cables.png" alt="Кабельная продукция" loading="lazy" width="610" height="393">
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__tag">Продукция компании</span>
-                <h3 class="product-card__title">Кабельная продукция</h3>
-              </div>
-            </article>
-            <article class="product-card">
-              <div class="product-card__media">
-                <img src="assets/img/product-cable-trays.png" alt="Кабеленесущие системы" loading="lazy" width="714" height="380">
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__tag">Продукция компании</span>
-                <h3 class="product-card__title">Кабеленесущие системы</h3>
-              </div>
-            </article>
-            <article class="product-card">
-              <div class="product-card__media">
-                <img src="assets/img/product-lighting.png" alt="Системы освещения" loading="lazy" width="724" height="401">
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__tag">Продукция компании</span>
-                <h3 class="product-card__title">Системы освещения<br>и осветительные устройства</h3>
-              </div>
-            </article>
-          </div>
-          <!-- duplicate for seamless loop -->
-          <div class="marquee__group" aria-hidden="true">
-            <article class="product-card">
-              <div class="product-card__media">
-                <img src="assets/img/product-switchgear.png" alt="" loading="lazy" width="492" height="398">
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__tag">Продукция компании</span>
-                <h3 class="product-card__title">Электрощитовое<br>и низковольтное оборудование</h3>
-              </div>
-            </article>
-            <article class="product-card">
-              <div class="product-card__media">
-                <img src="assets/img/product-cables.png" alt="" loading="lazy" width="610" height="393">
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__tag">Продукция компании</span>
-                <h3 class="product-card__title">Кабельная продукция</h3>
-              </div>
-            </article>
-            <article class="product-card">
-              <div class="product-card__media">
-                <img src="assets/img/product-cable-trays.png" alt="" loading="lazy" width="714" height="380">
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__tag">Продукция компании</span>
-                <h3 class="product-card__title">Кабеленесущие системы</h3>
-              </div>
-            </article>
-            <article class="product-card">
-              <div class="product-card__media">
-                <img src="assets/img/product-lighting.png" alt="" loading="lazy" width="724" height="401">
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__tag">Продукция компании</span>
-                <h3 class="product-card__title">Системы освещения<br>и осветительные устройства</h3>
-              </div>
-            </article>
+      <!-- Single source list; JS clones for seamless infinite loop -->
+      <div class="marquee marquee--products" data-marquee data-speed="0.45" aria-label="Продукция компании">
+        <div class="marquee__viewport">
+          <div class="marquee__track">
+            <div class="marquee__group">
+              <article class="product-card">
+                <div class="product-card__media">
+                  <img src="assets/img/product-switchgear.png" alt="Электрощитовое оборудование" loading="lazy" width="492" height="398">
+                </div>
+                <div class="product-card__body">
+                  <span class="product-card__tag">Продукция компании</span>
+                  <h3 class="product-card__title">Электрощитовое<br>и низковольтное оборудование</h3>
+                </div>
+              </article>
+              <article class="product-card">
+                <div class="product-card__media">
+                  <img src="assets/img/product-cables.png" alt="Кабельная продукция" loading="lazy" width="610" height="393">
+                </div>
+                <div class="product-card__body">
+                  <span class="product-card__tag">Продукция компании</span>
+                  <h3 class="product-card__title">Кабельная продукция</h3>
+                </div>
+              </article>
+              <article class="product-card">
+                <div class="product-card__media">
+                  <img src="assets/img/product-cable-trays.png" alt="Кабеленесущие системы" loading="lazy" width="714" height="380">
+                </div>
+                <div class="product-card__body">
+                  <span class="product-card__tag">Продукция компании</span>
+                  <h3 class="product-card__title">Кабеленесущие системы</h3>
+                </div>
+              </article>
+              <article class="product-card">
+                <div class="product-card__media">
+                  <img src="assets/img/product-lighting.png" alt="Системы освещения" loading="lazy" width="724" height="401">
+                </div>
+                <div class="product-card__body">
+                  <span class="product-card__tag">Продукция компании</span>
+                  <h3 class="product-card__title">Системы освещения<br>и осветительные устройства</h3>
+                </div>
+              </article>
+              <article class="product-card">
+                <div class="product-card__media">
+                  <img src="assets/img/product-electro-profile.png" alt="Электропрофиль" loading="lazy" width="724" height="401">
+                </div>
+                <div class="product-card__body">
+                  <span class="product-card__tag">Продукция компании</span>
+                  <h3 class="product-card__title">Электропрофиль<br>и монтажные системы</h3>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </div>
@@ -176,6 +149,7 @@
           <div class="about__text">
             <p>Наша компания специализируется на комплексных решениях <strong>инженерной инфраструктуры</strong> для крупных строительных Федеральных объектов. За время работы мы зарекомендовали себя как надёжный поставщик, предлагающий высокое качество продукции, индивидуальный подход к клиентам и своевременные поставки.</p>
             <p>Благодаря нашему профессионализму и обширной сети партнёров, мы сможем предложить продукцию с конкурентными ценами.</p>
+            <p>Наша миссия - объединять заказчиков и подрядчиков вокруг безопасных, эффективных и инновационных инженерных решений для строительных объектов, обеспечивая полный спектр услуг: от проектирования и поставок до комплексной комплектации и сервисной поддержки.</p>
           </div>
           <a href="#contacts" class="btn btn--gold">Оставить заявку</a>
         </div>
@@ -193,23 +167,18 @@
         <p class="section__lead">Мы работаем как официальные дилеры и субдилеры производителей.<br>Гарантируем оригинальность продукции и высокие стандарты качества.<br>Благодаря прямым контрактам, наши ценовые предложения остаются оптимальными на рынке.</p>
       </div>
 
-      <div class="marquee marquee--partners" aria-label="Логотипы партнёров">
-        <div class="marquee__track">
-          <div class="marquee__group">
-            <div class="partner-card"><img src="assets/img/partner-eltex.png" alt="ELTEX" loading="lazy"></div>
-            <div class="partner-card"><img src="assets/img/partner-cnp.png" alt="CNP" loading="lazy"></div>
-            <div class="partner-card"><img src="assets/img/partner-aikon.png" alt="aikon" loading="lazy"></div>
-            <div class="partner-card"><img src="assets/img/partner-energocable.png" alt="АО Завод Энергокабель" loading="lazy"></div>
-            <div class="partner-card"><img src="assets/img/partner-paritet.png" alt="Паритет Кабельный завод" loading="lazy"></div>
-            <div class="partner-card"><img src="assets/img/partner-ostec.png" alt="OSTEC система инженерных трасс" loading="lazy"></div>
-          </div>
-          <div class="marquee__group" aria-hidden="true">
-            <div class="partner-card"><img src="assets/img/partner-eltex.png" alt="" loading="lazy"></div>
-            <div class="partner-card"><img src="assets/img/partner-cnp.png" alt="" loading="lazy"></div>
-            <div class="partner-card"><img src="assets/img/partner-aikon.png" alt="" loading="lazy"></div>
-            <div class="partner-card"><img src="assets/img/partner-energocable.png" alt="" loading="lazy"></div>
-            <div class="partner-card"><img src="assets/img/partner-paritet.png" alt="" loading="lazy"></div>
-            <div class="partner-card"><img src="assets/img/partner-ostec.png" alt="" loading="lazy"></div>
+      <!-- Single source list; JS clones for seamless infinite loop -->
+      <div class="marquee marquee--partners" data-marquee data-speed="0.4" aria-label="Логотипы партнёров">
+        <div class="marquee__viewport">
+          <div class="marquee__track">
+            <div class="marquee__group">
+              <div class="partner-card"><img src="assets/img/partner-eltex.png" alt="ELTEX" loading="lazy"></div>
+              <div class="partner-card"><img src="assets/img/partner-cnp.png" alt="CNP" loading="lazy"></div>
+              <div class="partner-card"><img src="assets/img/partner-aikon.png" alt="aikon" loading="lazy"></div>
+              <div class="partner-card"><img src="assets/img/partner-energocable.png" alt="АО Завод Энергокабель" loading="lazy"></div>
+              <div class="partner-card"><img src="assets/img/partner-paritet.png" alt="Паритет Кабельный завод" loading="lazy"></div>
+              <div class="partner-card"><img src="assets/img/partner-ostec.png" alt="OSTEC система инженерных трасс" loading="lazy"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -352,7 +321,7 @@
           </div>
           <div class="contacts__item">
             <span class="contacts__label">Электронная почта:</span>
-            <a class="contacts__mail" href="mailto:oooIntexelectro@mail.ru">oooIntexelectro@mail.ru</a>
+            <a class="contacts__mail" href="mailto:email@intexelectro.ru">email@intexelectro.ru</a>
           </div>
           <div class="contacts__item">
             <span class="contacts__label">Реквизиты:</span>

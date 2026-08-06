@@ -157,12 +157,43 @@ input {
 .logo img {
   width: clamp(180px, 18vw, 248px);
   height: auto;
-  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.55));
+  /* base ambient glow — never fully off (working bulb) */
+  filter:
+    drop-shadow(2px 1px 12px rgba(201, 169, 106, 0.4))
+    drop-shadow(0 10px 22px rgba(0, 0, 0, 0.5));
   transition: transform var(--transition);
+  animation: logo-bulb 2.6s ease-in-out infinite;
 }
 
 .logo:hover img {
   transform: scale(1.03);
+}
+
+/* Soft pulse in theme gold — lamp stays lit, only intensity breathes */
+@keyframes logo-bulb {
+  0%,
+  100% {
+    filter:
+      drop-shadow(2px 1px 12px rgba(201, 169, 106, 0.38))
+      drop-shadow(0 8px 18px rgba(0, 0, 0, 0.5));
+  }
+  40% {
+    filter:
+      drop-shadow(2px 1px 18px rgba(212, 188, 110, 0.78))
+      drop-shadow(1px 0 28px rgba(201, 169, 106, 0.45))
+      drop-shadow(0 10px 22px rgba(0, 0, 0, 0.48));
+  }
+  55% {
+    filter:
+      drop-shadow(2px 1px 14px rgba(201, 169, 106, 0.55))
+      drop-shadow(0 9px 20px rgba(0, 0, 0, 0.5));
+  }
+  70% {
+    filter:
+      drop-shadow(2px 1px 20px rgba(217, 188, 128, 0.82))
+      drop-shadow(0 0 26px rgba(201, 169, 106, 0.4))
+      drop-shadow(0 10px 22px rgba(0, 0, 0, 0.48));
+  }
 }
 
 .logo--footer {
@@ -172,6 +203,16 @@ input {
 .logo--footer img {
   width: 160px;
   filter: none;
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo img {
+    animation: none;
+    filter:
+      drop-shadow(2px 1px 14px rgba(201, 169, 106, 0.55))
+      drop-shadow(0 10px 22px rgba(0, 0, 0, 0.5));
+  }
 }
 
 .nav {
@@ -453,62 +494,50 @@ input {
   min-height: 2.6em;
 }
 
-/* ===== Infinite marquees (partners + products) ===== */
+/* ===== Infinite marquees (JS-driven seamless loop) ===== */
 .marquee {
   position: relative;
   width: 100%;
-  overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  /* edge fade only — no layout gaps */
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.marquee__viewport {
+  width: 100%;
+  overflow: hidden; /* scroll hidden — JS transform only */
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.marquee.is-dragging .marquee__viewport {
+  cursor: grabbing;
+}
+
+.marquee.is-paused .marquee__viewport {
+  cursor: grab;
 }
 
 .marquee__track {
   display: flex;
   width: max-content;
   will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
 .marquee__group {
   display: flex;
   gap: 16px;
-  padding-right: 16px;
   flex-shrink: 0;
-}
-
-.marquee--products .marquee__track {
-  animation: marquee-scroll 40s linear infinite;
-}
-
-.marquee--partners .marquee__track {
-  animation: marquee-scroll 35s linear infinite;
-}
-
-/* Pause strip on hover (products + partners) */
-.marquee--products:hover .marquee__track,
-.marquee--partners:hover .marquee__track {
-  animation-play-state: paused;
-}
-
-@keyframes marquee-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  /* trailing gap equal to item gap so clone join is seamless */
+  padding-inline-end: 16px;
+  box-sizing: content-box;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee__track {
-    animation: none !important;
-  }
-
-  .marquee {
-    overflow-x: auto;
-  }
-
-  .marquee__track {
-    width: auto;
+  .marquee[data-marquee] {
+    /* JS will disable auto-scroll when reduced motion */
   }
 }
 
