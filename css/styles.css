@@ -45,6 +45,11 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+  /* no native browser image drag (ghost preview) */
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: auto;
 }
 
 a {
@@ -527,8 +532,20 @@ input {
   padding-block: 10px;
   box-sizing: content-box;
   cursor: grab;
+  /* allow vertical page scroll; horizontal handled by JS */
   touch-action: pan-y;
   user-select: none;
+  -webkit-user-select: none;
+}
+
+.marquee img {
+  -webkit-user-drag: none;
+  pointer-events: none; /* drag moves the strip, not the bitmap */
+}
+
+/* Partner links still receive clicks (img is non-interactive, parent <a> is) */
+.marquee a.partner-card {
+  pointer-events: auto;
 }
 
 .marquee.is-dragging .marquee__viewport {

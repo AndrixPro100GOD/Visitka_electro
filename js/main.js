@@ -3,6 +3,20 @@
   const burger = document.getElementById("burger");
   const nav = document.getElementById("nav");
 
+  /* Disable native image drag site-wide (keep link clicks) */
+  document.addEventListener(
+    "dragstart",
+    (e) => {
+      if (e.target instanceof HTMLImageElement || e.target.closest?.("img")) {
+        e.preventDefault();
+      }
+    },
+    true
+  );
+  document.querySelectorAll("img").forEach((img) => {
+    img.setAttribute("draggable", "false");
+  });
+
   /* Sticky header state */
   const onScroll = () => {
     if (!header) return;
@@ -167,10 +181,15 @@
       c.querySelectorAll("img").forEach((img) => {
         img.alt = "";
         img.removeAttribute("loading");
+        img.setAttribute("draggable", "false");
       });
-      // clones: keep links for click, but mark as decorative for AT
       return c;
     };
+
+    // Never drag raw images inside marquee
+    source.querySelectorAll("img").forEach((img) => {
+      img.setAttribute("draggable", "false");
+    });
 
     // Build: [group][gap][group][gap]… until width ≥ 2× viewport
     // First unit stays: source + gap after it
@@ -248,13 +267,24 @@
       { passive: false }
     );
 
+    const resumeAuto = () => {
+      if (prefersReducedMotion) return;
+      paused = false;
+      root.classList.remove("is-paused");
+    };
+
+    const pauseAuto = () => {
+      paused = true;
+      root.classList.add("is-paused");
+    };
+
     viewport.addEventListener("pointerdown", (e) => {
-      if (e.button !== 0) return;
+      if (e.button !== 0 && e.pointerType === "mouse") return;
       dragging = true;
       dragMoved = false;
-      paused = true;
+      pauseAuto();
       lastX = e.clientX;
-      root.classList.add("is-dragging", "is-paused");
+      root.classList.add("is-dragging");
       viewport.setPointerCapture(e.pointerId);
     });
 
@@ -277,9 +307,27 @@
       } catch (_) {
         /* ignore */
       }
+
+      // Touch / pen: always resume after release (no reliable :hover)
+      // Mouse: resume only if pointer left the marquee
+      const isTouch = e.pointerType === "touch" || e.pointerType === "pen";
+      const stillHover =
+        e.pointerType === "mouse" && root.matches(":hover");
+
+      if (isTouch || !stillHover) {
+        resumeAuto();
+      } else {
+        pauseAuto(); // mouse still over strip — keep paused
+      }
     };
     viewport.addEventListener("pointerup", endDrag);
     viewport.addEventListener("pointercancel", endDrag);
+    viewport.addEventListener("lostpointercapture", () => {
+      if (!dragging) return;
+      dragging = false;
+      root.classList.remove("is-dragging");
+      resumeAuto();
+    });
 
     // Suppress click after drag so partner links don't fire accidentally
     track.addEventListener(
@@ -294,17 +342,25 @@
       true
     );
 
+    // Desktop hover pause / leave resume
     root.addEventListener("mouseenter", () => {
-      paused = true;
-      root.classList.add("is-paused");
+      if (prefersReducedMotion) return;
+      pauseAuto();
     });
     root.addEventListener("mouseleave", () => {
       if (dragging) return;
-      if (!prefersReducedMotion) {
-        paused = false;
-        root.classList.remove("is-paused");
-      }
+      resumeAuto();
     });
+
+    // Touch leave (when finger leaves element without cancel in some browsers)
+    root.addEventListener(
+      "touchend",
+      () => {
+        if (dragging) return;
+        resumeAuto();
+      },
+      { passive: true }
+    );
 
     const ro = new ResizeObserver(() => fillClones());
     ro.observe(source);
