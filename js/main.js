@@ -132,13 +132,15 @@
 
   /**
    * Seamless infinite marquee (products + partners).
-   * - One source group in HTML; we clone it for a perfect loop (no gap).
-   * - Auto-scroll via rAF; offset wraps by exact set width.
-   * - Hover: pause auto, wheel / drag to scroll horizontally.
+   * Sequence: card1 → card2 → … → cardN → card1 → …
+   * Loop unit = one full group + 16px gap (same as item gap). No empty strip.
+   * Hover: pause auto; wheel / drag for horizontal browse.
    */
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
+
+  const GAP_PX = 16;
 
   const initMarquee = (root) => {
     const viewport = root.querySelector(".marquee__viewport");
@@ -146,45 +148,77 @@
     const source = track?.querySelector(".marquee__group");
     if (!viewport || !track || !source) return;
 
-    // Remove any previous clones (e.g. hot reload)
-    track.querySelectorAll(".marquee__group--clone").forEach((n) => n.remove());
+    // Clean previous clones / spacers
+    track
+      .querySelectorAll(".marquee__group--clone, .marquee__set-gap")
+      .forEach((n) => n.remove());
 
-    const clone = source.cloneNode(true);
-    clone.classList.add("marquee__group--clone");
-    clone.setAttribute("aria-hidden", "true");
-    clone.querySelectorAll("img").forEach((img) => {
-      img.alt = "";
-      img.removeAttribute("loading");
-    });
-    track.appendChild(clone);
+    const makeGap = () => {
+      const gap = document.createElement("div");
+      gap.className = "marquee__set-gap";
+      gap.setAttribute("aria-hidden", "true");
+      return gap;
+    };
+
+    const cloneGroup = () => {
+      const c = source.cloneNode(true);
+      c.classList.add("marquee__group--clone");
+      c.setAttribute("aria-hidden", "true");
+      c.querySelectorAll("img").forEach((img) => {
+        img.alt = "";
+        img.removeAttribute("loading");
+      });
+      // clones: keep links for click, but mark as decorative for AT
+      return c;
+    };
+
+    // Build: [group][gap][group][gap]… until width ≥ 2× viewport
+    // First unit stays: source + gap after it
+    track.appendChild(makeGap());
 
     let setWidth = 0;
     let offset = 0;
     let paused = false;
     let dragging = false;
+    let dragMoved = false;
     let lastX = 0;
     let rafId = 0;
-    const speed = parseFloat(root.dataset.speed || "0.4"); // px per frame @60fps
+    const speed = parseFloat(root.dataset.speed || "0.45");
 
-    const measure = () => {
-      // scrollWidth of one group including its trailing padding
-      setWidth = source.getBoundingClientRect().width;
-      // If images load late, re-measure
-      if (setWidth < 1) return;
-      // Keep offset in range after resize
+    const fillClones = () => {
+      // Remove extras except source + its following gap
+      while (track.children.length > 2) {
+        track.removeChild(track.lastChild);
+      }
+
+      // Measure one set: group width + gap
+      const groupW = source.offsetWidth;
+      if (groupW < 1) return;
+      setWidth = groupW + GAP_PX;
+
+      const minTrack = Math.max(viewport.offsetWidth * 2 + setWidth, setWidth * 2);
+      let total = setWidth; // source + first gap already in track
+
+      while (total < minTrack) {
+        track.appendChild(cloneGroup());
+        track.appendChild(makeGap());
+        total += setWidth;
+      }
+
+      // Snap offset into range
       if (setWidth > 0) {
         offset = ((offset % setWidth) + setWidth) % setWidth;
-        apply();
       }
+      apply();
     };
 
     const apply = () => {
-      track.style.transform = `translate3d(${-offset}px, 0, 0)`;
+      // Use integer pixels to avoid subpixel seam flicker
+      track.style.transform = `translate3d(${-Math.round(offset)}px, 0, 0)`;
     };
 
     const wrap = () => {
       if (setWidth <= 0) return;
-      // Keep offset in [0, setWidth)
       offset = ((offset % setWidth) + setWidth) % setWidth;
     };
 
@@ -197,12 +231,10 @@
       rafId = requestAnimationFrame(tick);
     };
 
-    // Wheel → horizontal when pointer is over the marquee
     viewport.addEventListener(
       "wheel",
       (e) => {
         if (setWidth <= 0) return;
-        // Prefer vertical wheel as horizontal strip control
         const delta =
           Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
         if (delta === 0) return;
@@ -216,10 +248,10 @@
       { passive: false }
     );
 
-    // Pointer drag
     viewport.addEventListener("pointerdown", (e) => {
       if (e.button !== 0) return;
       dragging = true;
+      dragMoved = false;
       paused = true;
       lastX = e.clientX;
       root.classList.add("is-dragging", "is-paused");
@@ -229,6 +261,7 @@
     viewport.addEventListener("pointermove", (e) => {
       if (!dragging) return;
       const dx = e.clientX - lastX;
+      if (Math.abs(dx) > 2) dragMoved = true;
       lastX = e.clientX;
       offset -= dx;
       wrap();
@@ -248,7 +281,19 @@
     viewport.addEventListener("pointerup", endDrag);
     viewport.addEventListener("pointercancel", endDrag);
 
-    // Hover: pause auto; leave: resume (unless reduced motion)
+    // Suppress click after drag so partner links don't fire accidentally
+    track.addEventListener(
+      "click",
+      (e) => {
+        if (dragMoved) {
+          e.preventDefault();
+          e.stopPropagation();
+          dragMoved = false;
+        }
+      },
+      true
+    );
+
     root.addEventListener("mouseenter", () => {
       paused = true;
       root.classList.add("is-paused");
@@ -261,46 +306,31 @@
       }
     });
 
-    // Measure after layout + images
-    const ro = new ResizeObserver(() => measure());
+    const ro = new ResizeObserver(() => fillClones());
     ro.observe(source);
     ro.observe(viewport);
 
-    const imgs = source.querySelectorAll("img");
-    let pending = imgs.length;
-    if (pending === 0) measure();
-    else {
-      imgs.forEach((img) => {
-        if (img.complete) {
-          pending -= 1;
-          if (pending === 0) measure();
-        } else {
-          img.addEventListener(
-            "load",
-            () => {
-              pending -= 1;
-              if (pending === 0) measure();
-            },
-            { once: true }
-          );
-          img.addEventListener(
-            "error",
-            () => {
-              pending -= 1;
-              if (pending === 0) measure();
-            },
-            { once: true }
-          );
-        }
-      });
-    }
+    const imgs = [...source.querySelectorAll("img")];
+    const waitImages = () =>
+      Promise.all(
+        imgs.map(
+          (img) =>
+            new Promise((resolve) => {
+              if (img.complete) resolve();
+              else {
+                img.addEventListener("load", resolve, { once: true });
+                img.addEventListener("error", resolve, { once: true });
+              }
+            })
+        )
+      );
 
-    // Safety remeasure
-    requestAnimationFrame(() => {
-      measure();
-      requestAnimationFrame(measure);
+    waitImages().then(() => {
+      fillClones();
+      requestAnimationFrame(fillClones);
     });
-    window.addEventListener("load", measure);
+
+    window.addEventListener("load", fillClones);
 
     if (prefersReducedMotion) {
       paused = true;
@@ -308,11 +338,6 @@
     }
 
     rafId = requestAnimationFrame(tick);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      ro.disconnect();
-    };
   };
 
   document.querySelectorAll("[data-marquee]").forEach(initMarquee);
