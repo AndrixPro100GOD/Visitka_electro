@@ -32,13 +32,8 @@
       <div class="header__contacts">
         <a href="tel:+79043866590" class="header__phone">+7 (904) 386-65-90</a>
         <a href="tel:+73432712299" class="header__phone">+7 (343) 271-22-99</a>
-        <!--
-          MAX: публичной ссылки вида wa.me/номер нет.
-          Открываем веб-клиент; номер в query — для удобства и будущих deep-link.
-          Когда появится профиль max.ru/u/… — замените href на него.
-        -->
         <a
-          href="https://web.max.ru/"
+          href="https://max.ru/u/f9LHodD0cOKCZ8udzRjwDm909m9rlszs9I8unr97Njp18h6C_0Xp84T7vgc"
           class="header__social"
           target="_blank"
           rel="noopener noreferrer"
@@ -84,14 +79,19 @@
         <h2 class="section__title">Надёжный фундамент<br>энергосистемы</h2>
       </div>
 
-      <!-- Single source list; JS clones for seamless infinite loop -->
+      <!--
+        Product images: assets/img/product-<slug>.png
+        Replace placeholder PNGs with real photos — keep the same filenames.
+        Slugs: switchgear, cables, cable-trays, lighting, ups, fasteners,
+               low-voltage, security, kipia, computers, network, software
+      -->
       <div class="marquee marquee--products" data-marquee data-speed="0.45" aria-label="Продукция компании">
         <div class="marquee__viewport">
           <div class="marquee__track">
             <div class="marquee__group">
               <article class="product-card">
                 <div class="product-card__media">
-                  <img src="assets/img/product-switchgear.png" alt="Электрощитовое оборудование" loading="lazy" width="492" height="398">
+                  <img src="assets/img/product-switchgear.png" alt="Электрощитовое и низковольтное оборудование" loading="lazy" width="640" height="400">
                 </div>
                 <div class="product-card__body">
                   <span class="product-card__tag">Продукция компании</span>
@@ -100,7 +100,7 @@
               </article>
               <article class="product-card">
                 <div class="product-card__media">
-                  <img src="assets/img/product-cables.png" alt="Кабельная продукция" loading="lazy" width="610" height="393">
+                  <img src="assets/img/product-cables.png" alt="Кабельная продукция" loading="lazy" width="640" height="400">
                 </div>
                 <div class="product-card__body">
                   <span class="product-card__tag">Продукция компании</span>
@@ -109,7 +109,7 @@
               </article>
               <article class="product-card">
                 <div class="product-card__media">
-                  <img src="assets/img/product-cable-trays.png" alt="Кабеленесущие системы" loading="lazy" width="714" height="380">
+                  <img src="assets/img/product-cable-trays.png" alt="Кабеленесущие системы" loading="lazy" width="640" height="400">
                 </div>
                 <div class="product-card__body">
                   <span class="product-card__tag">Продукция компании</span>
@@ -118,20 +118,83 @@
               </article>
               <article class="product-card">
                 <div class="product-card__media">
-                  <img src="assets/img/product-lighting.png" alt="Системы освещения" loading="lazy" width="724" height="401">
+                  <img src="assets/img/product-lighting.png" alt="Системы освещения и осветительные установки" loading="lazy" width="640" height="400">
                 </div>
                 <div class="product-card__body">
                   <span class="product-card__tag">Продукция компании</span>
-                  <h3 class="product-card__title">Системы освещения<br>и осветительные устройства</h3>
+                  <h3 class="product-card__title">Системы освещения<br>и осветительные установки</h3>
                 </div>
               </article>
               <article class="product-card">
                 <div class="product-card__media">
-                  <img src="assets/img/product-electro-profile.png" alt="Электропрофиль" loading="lazy" width="724" height="401">
+                  <img src="assets/img/product-ups.png" alt="Источники бесперебойного питания" loading="lazy" width="640" height="400">
                 </div>
                 <div class="product-card__body">
                   <span class="product-card__tag">Продукция компании</span>
-                  <h3 class="product-card__title">Электропрофиль<br>и монтажные системы</h3>
+                  <h3 class="product-card__title">Источники бесперебойного<br>питания</h3>
+                </div>
+              </article>
+              <article class="product-card">
+                <div class="product-card__media">
+                  <img src="assets/img/product-fasteners.png" alt="Строительный крепеж и фурнитура" loading="lazy" width="640" height="400">
+                </div>
+                <div class="product-card__body">
+                  <span class="product-card__tag">Продукция компании</span>
+                  <h3 class="product-card__title">Строительный крепеж<br>и фурнитура</h3>
+                </div>
+              </article>
+              <article class="product-card">
+                <div class="product-card__media">
+                  <img src="assets/img/product-low-voltage.png" alt="Слаботочные системы" loading="lazy" width="640" height="400">
+                </div>
+                <div class="product-card__body">
+                  <span class="product-card__tag">Продукция компании</span>
+                  <h3 class="product-card__title">Слаботочные системы</h3>
+                </div>
+              </article>
+              <article class="product-card">
+                <div class="product-card__media">
+                  <img src="assets/img/product-security.png" alt="Системы безопасности" loading="lazy" width="640" height="400">
+                </div>
+                <div class="product-card__body">
+                  <span class="product-card__tag">Продукция компании</span>
+                  <h3 class="product-card__title">Системы безопасности</h3>
+                </div>
+              </article>
+              <article class="product-card">
+                <div class="product-card__media">
+                  <img src="assets/img/product-kipia.png" alt="КИПиА" loading="lazy" width="640" height="400">
+                </div>
+                <div class="product-card__body">
+                  <span class="product-card__tag">Продукция компании</span>
+                  <h3 class="product-card__title">КИПиА</h3>
+                </div>
+              </article>
+              <article class="product-card">
+                <div class="product-card__media">
+                  <img src="assets/img/product-computers.png" alt="Компьютерная техника" loading="lazy" width="640" height="400">
+                </div>
+                <div class="product-card__body">
+                  <span class="product-card__tag">Продукция компании</span>
+                  <h3 class="product-card__title">Компьютерная техника</h3>
+                </div>
+              </article>
+              <article class="product-card">
+                <div class="product-card__media">
+                  <img src="assets/img/product-network.png" alt="Сетевое и серверное оборудование" loading="lazy" width="640" height="400">
+                </div>
+                <div class="product-card__body">
+                  <span class="product-card__tag">Продукция компании</span>
+                  <h3 class="product-card__title">Сетевое и серверное<br>оборудование</h3>
+                </div>
+              </article>
+              <article class="product-card">
+                <div class="product-card__media">
+                  <img src="assets/img/product-software.png" alt="Программное обеспечение" loading="lazy" width="640" height="400">
+                </div>
+                <div class="product-card__body">
+                  <span class="product-card__tag">Продукция компании</span>
+                  <h3 class="product-card__title">Программное обеспечение</h3>
                 </div>
               </article>
             </div>
@@ -227,7 +290,7 @@
               </svg>
             </div>
             <div class="cert-card__body">
-              <h3 class="cert-card__title">Дилерский сертификат</h3>
+              <h3 class="cert-card__title">Сертификат СИЭНПИ</h3>
               <p class="cert-card__meta">ООО «Интекс-Электро» · PDF</p>
             </div>
             <span class="cert-card__action">Открыть / скачать</span>
@@ -390,7 +453,7 @@
         <a href="tel:+79043866590" class="header__phone">+7 (904) 386-65-90</a>
         <a href="tel:+73432712299" class="header__phone">+7 (343) 271-22-99</a>
         <a
-          href="https://web.max.ru/"
+          href="https://max.ru/u/f9LHodD0cOKCZ8udzRjwDm909m9rlszs9I8unr97Njp18h6C_0Xp84T7vgc"
           class="header__social"
           target="_blank"
           rel="noopener noreferrer"
