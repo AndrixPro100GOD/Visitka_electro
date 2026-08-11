@@ -13,7 +13,7 @@
   --gold-soft: #b8975a;
   --gold-hover: #d9bc80;
   --gold-dark: #8a7340;
-  --header-h: 72px;
+  --header-h: 104px;
   --container: 1200px;
   --radius: 4px;
   --transition: 0.25s ease;
@@ -102,44 +102,33 @@ input {
 }
 
 /* ===== Header =====
-   Thin nav bar; logo is larger and intentionally overflows
-   so it stays more visible than menu text / bar chrome.
+   Full-height bar: logo fits inside; nav / phones scaled to match.
 */
 .header {
   position: fixed;
   inset: 0 0 auto;
   z-index: 100;
   height: var(--header-h);
-  /* soft glass, no hard edge that “cuts” the logo */
-  background: linear-gradient(
-    180deg,
-    rgba(11, 11, 11, 0.78) 0%,
-    rgba(11, 11, 11, 0.45) 70%,
-    rgba(11, 11, 11, 0) 100%
-  );
-  backdrop-filter: blur(10px);
-  border-bottom: none;
-  overflow: visible;
-  transition: background var(--transition);
+  background: rgba(11, 11, 11, 0.88);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid transparent;
+  overflow: hidden;
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
 
 .header.is-scrolled {
-  background: linear-gradient(
-    180deg,
-    rgba(11, 11, 11, 0.92) 0%,
-    rgba(11, 11, 11, 0.72) 80%,
-    rgba(11, 11, 11, 0.2) 100%
-  );
-  border-bottom: none;
+  background: rgba(11, 11, 11, 0.96);
+  border-bottom-color: var(--border);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
 }
 
 .header__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: clamp(16px, 2.5vw, 32px);
   height: 100%;
-  overflow: visible;
+  padding-block: 10px;
   position: relative;
 }
 
@@ -149,18 +138,22 @@ input {
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  /* allow logo to grow below the thin bar */
-  margin-bottom: -28px;
-  padding-top: 4px;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 .logo img {
-  width: clamp(180px, 18vw, 248px);
-  height: auto;
+  /* fits within header height with room for glow */
+  width: auto;
+  height: clamp(56px, 7.2vw, 78px);
+  max-width: min(280px, 32vw);
+  object-fit: contain;
+  object-position: left center;
   /* base ambient glow — never fully off (working bulb) */
   filter:
     drop-shadow(2px 1px 12px rgba(201, 169, 106, 0.4))
-    drop-shadow(0 10px 22px rgba(0, 0, 0, 0.5));
+    drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
   transition: transform var(--transition);
   animation: logo-bulb 2.6s ease-in-out infinite;
 }
@@ -218,16 +211,17 @@ input {
 .nav {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: clamp(18px, 2.2vw, 32px);
 }
 
 .nav__link {
-  font-size: 13px;
+  font-size: clamp(12px, 1.05vw, 14px);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-soft);
   transition: color var(--transition);
+  line-height: 1.2;
 }
 
 .nav__link:hover {
@@ -237,11 +231,11 @@ input {
 .header__contacts {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: clamp(12px, 1.5vw, 20px);
 }
 
 .header__phone {
-  font-size: 13px;
+  font-size: clamp(12px, 1.05vw, 15px);
   font-weight: 500;
   color: var(--text-soft);
   white-space: nowrap;
@@ -255,17 +249,17 @@ input {
 .header__social {
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 42px;
+  height: 42px;
   flex-shrink: 0;
-  border-radius: 10px;
+  border-radius: 11px;
   overflow: hidden;
   transition: transform var(--transition), opacity var(--transition), filter var(--transition);
 }
 
 .header__social img {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   object-fit: contain;
   /* monochrome fallback if color SVG is used */
   filter: grayscale(1) contrast(1.05);
@@ -951,19 +945,27 @@ input {
 
 @media (max-width: 900px) {
   :root {
-    --header-h: 64px;
+    --header-h: 84px;
+  }
+
+  .header__inner {
+    padding-block: 8px;
   }
 
   .logo {
-    margin-bottom: -18px;
+    margin: 0;
   }
 
   .logo img {
-    width: clamp(150px, 36vw, 200px);
+    height: clamp(48px, 12vw, 64px);
+    max-width: min(200px, 42vw);
+    width: auto;
   }
 
   .burger {
     display: flex;
+    width: 44px;
+    height: 44px;
   }
 
   .nav {
