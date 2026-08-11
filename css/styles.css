@@ -422,7 +422,8 @@ input {
   background: var(--bg);
   padding-top: 80px;
   padding-bottom: 80px;
-  overflow: hidden;
+  /* visible so product-card hover is not clipped */
+  overflow: visible;
 }
 
 .products .container {
@@ -498,14 +499,31 @@ input {
 .marquee {
   position: relative;
   width: 100%;
-  /* soft edge fade — does not affect layout width */
-  mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+  /* outer pad so hover ring/shadow of cards is not cut by section edges */
+  padding-block: 12px;
+  /* horizontal fade only (mask clips paint — keep vertical fully opaque) */
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 4%,
+    #000 96%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 4%,
+    #000 96%,
+    transparent 100%
+  );
 }
 
 .marquee__viewport {
   width: 100%;
+  /* clip only horizontally; vertical padding keeps hover border fully visible */
   overflow: hidden;
+  padding-block: 10px;
+  box-sizing: content-box;
   cursor: grab;
   touch-action: pan-y;
   user-select: none;
@@ -606,7 +624,8 @@ input {
 /* ===== Partners ===== */
 .partners {
   background: var(--bg);
-  overflow: hidden;
+  /* allow hover outline of marquee cards to paint outside strip */
+  overflow: visible;
 }
 
 .partners .container {
@@ -624,16 +643,32 @@ input {
   padding: 24px 20px;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  transition: border-color var(--transition), background var(--transition), transform var(--transition);
+  border-radius: 2px;
+  /* box-shadow instead of translateY — no clip on top edge */
+  transition:
+    border-color var(--transition),
+    background var(--transition),
+    box-shadow var(--transition);
   text-decoration: none;
   color: inherit;
   cursor: pointer;
 }
 
 .partner-card:hover {
-  border-color: rgba(201, 169, 106, 0.35);
+  border-color: rgba(201, 169, 106, 0.55);
   background: var(--bg-card-hover);
-  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1px rgba(201, 169, 106, 0.35),
+    0 8px 24px rgba(0, 0, 0, 0.35);
+  z-index: 2;
+  position: relative;
+}
+
+.partner-card:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  z-index: 2;
+  position: relative;
 }
 
 .partner-card img {
